@@ -7,6 +7,10 @@ public class RandomMove : MonoBehaviour {
 	public float moveSpeed;
 	public float bounceSpeed;
 
+	public float velo;
+
+	public ContactPoint2D [] lastcontacts;
+
 	// Use this for initialization
 	void Start () {
 		ChooseRandomDirection ();
@@ -14,6 +18,13 @@ public class RandomMove : MonoBehaviour {
 	
 	}
 
+	void OnDrawGizmos()  {
+		if (lastcontacts == null)
+				return;
+		foreach (ContactPoint2D pnt in lastcontacts) {
+			Debug.DrawRay(pnt.point,pnt.normal * 2f);
+				}
+	}
 
 	void ChooseRandomDirection() {
 
@@ -28,7 +39,9 @@ public class RandomMove : MonoBehaviour {
 		//transform.Rotate (0, 0, Random.Range (0, 180f));
 
 		//Debug.Log ("Collided Rigidbody" + collision.collider.name);
+		lastcontacts = collision.contacts;
 		foreach (ContactPoint2D c in collision.contacts) {
+
 			rigidbody2D.AddForce(bounceSpeed * c.normal );
 		}
 	}
@@ -54,6 +67,11 @@ public class RandomMove : MonoBehaviour {
 
 		if (rigidbody2D.velocity.sqrMagnitude < 0.3f) 
 			rigidbody2D.AddForce(moveSpeed * transform.up);
+
+		if (rigidbody2D.velocity.sqrMagnitude > 0.7f) 
+			rigidbody2D.velocity = moveSpeed * transform.up;
+
+		velo = rigidbody2D.velocity.sqrMagnitude;
 
 		//CharacterController controller = GetComponent<CharacterController> ();
 		//controller.Move(transform.up * moveSpeed *  Time.deltaTime);
