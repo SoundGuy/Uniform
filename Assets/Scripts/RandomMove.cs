@@ -14,7 +14,9 @@ public class RandomMove : MonoBehaviour {
 
 
 	void ChooseRandomDirection() {
-		moveDirection = new Vector3 (Random.Range (0f, Mathf.PI), Random.Range (0f, Mathf.PI), 0);
+
+		moveDirection =  new Vector3 (Random.Range (-1f, 1f), Random.Range (-1f, 1f), 0);
+		moveDirection.Normalize ();
 	}
 
 
