@@ -14,6 +14,8 @@ public class Ghetto : MonoBehaviour {
 
 	public static Ghetto instance;
 
+	UILabel label;
+
 	// Use this for initialization
 	void Start () {
 		jews =0;
@@ -21,6 +23,7 @@ public class Ghetto : MonoBehaviour {
 		jewsInGhetto=0;
 		instance = this;
 
+		label = GameObject.Find("Instructions").GetComponent<UILabel>();
 	
 	}
 	
@@ -36,6 +39,8 @@ public class Ghetto : MonoBehaviour {
 		if (jews >= openAt && jewsInGhetto < capacity) {
 			GetComponent<SpriteRenderer>().sprite = openSprite;
 			open = true;
+
+			label.text = "Contain Threats";
 		}
 
 	}
@@ -50,6 +55,7 @@ public class Ghetto : MonoBehaviour {
 		if (jewsInGhetto >= capacity) {
 			full = true;
 			GetComponent<SpriteRenderer>().sprite = closedSprite;
+			label.text = "Scroll to zoom";
 		}
 	}
 }

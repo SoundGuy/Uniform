@@ -44,6 +44,7 @@ public class TurnToYellow : MonoBehaviour {
 				}
 
 				// PC
+				/*
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				RaycastHit2D hit = Physics2D.Raycast(ray.origin,ray.direction);
 				if (hit) {
@@ -52,10 +53,10 @@ public class TurnToYellow : MonoBehaviour {
 						Debug.Log("InGhetto" + hit);
 
 						transform.position = hit.collider.transform.position;
-						Ghetto gt = hit.collider.GetComponent<Ghetto>();
+						//Ghetto gt = hit.collider.GetComponent<Ghetto>();
 						//gt.addJew();
 					}		
-				}
+				}*/
 			}
 			imSelected = false;
 		}
