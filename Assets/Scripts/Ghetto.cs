@@ -29,6 +29,10 @@ public class Ghetto : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (full && Input.GetAxis("Mouse ScrollWheel") < 0f) {
+			Application.LoadLevel("camp");
+		}
 	
 	}
 
