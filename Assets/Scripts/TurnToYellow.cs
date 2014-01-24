@@ -37,6 +37,12 @@ public class TurnToYellow : MonoBehaviour {
 		if (Input.GetButtonUp("Fire1")) {
 			//Debug.Log ("Up + " + imSelected);
 			if (canSelect()) {
+
+				Vector3 vec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+				if (Ghetto.instance.GetComponent<BoxCollider2D>().OverlapPoint(new Vector2(vec.x,vec.y))) {
+					Ghetto.instance.addJew();
+				}
+
 				// PC
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				RaycastHit2D hit = Physics2D.Raycast(ray.origin,ray.direction);
@@ -47,20 +53,23 @@ public class TurnToYellow : MonoBehaviour {
 
 						transform.position = hit.collider.transform.position;
 						Ghetto gt = hit.collider.GetComponent<Ghetto>();
-						gt.addJew();
+						//gt.addJew();
 					}		
 				}
 			}
 			imSelected = false;
 		}
 
-		LineRenderer lr = GetComponent<LineRenderer>();
+		//LineRenderer lr = GetComponent<LineRenderer>();
 		if (canSelect()) {
-			lr.enabled = true;
-			lr.SetPosition(0,transform.position);
-			lr.SetPosition(1,Camera.main.ScreenToWorldPoint(Input.mousePosition));
+		//	lr.enabled = true;
+		//	lr.SetPosition(0,transform.position);
+		//	lr.SetPosition(1,Camera.main.ScreenToWorldPoint(Input.mousePosition));
+			Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			pos.z=0;
+			transform.position = pos;
 		} else {
-			lr.enabled = false;
+		//	lr.enabled = false;
 		}
 
 	}
