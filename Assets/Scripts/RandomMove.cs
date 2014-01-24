@@ -41,9 +41,14 @@ public class RandomMove : MonoBehaviour {
 		//Debug.Log ("Collided Rigidbody" + collision.collider.name);
 		lastcontacts = collision.contacts;
 		foreach (ContactPoint2D c in collision.contacts) {
-
-			rigidbody2D.AddForce(bounceSpeed * c.normal );
+			if (c.collider.gameObject.name == "CageWall") {
+				Debug.Log("HitWall!!");
+			 	rigidbody2D.velocity = (bounceSpeed * c.normal );
+				ChooseRandomDirection();
+			}
 		}
+
+
 	}
 
 	//void OnControllerColliderHit(ControllerColliderHit hit) {
@@ -63,18 +68,17 @@ public class RandomMove : MonoBehaviour {
 	//}
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
+		/*
+		if (rigidbody2D.velocity.sqrMagnitude < 0.3f) {
+			//ChooseRandomDirection();
+			rigidbody2D.velocity = (moveSpeed * transform.up);
+		}*/
 
-		if (rigidbody2D.velocity.sqrMagnitude < 0.3f) 
-			rigidbody2D.AddForce(moveSpeed * transform.up);
-
-		if (rigidbody2D.velocity.sqrMagnitude > 0.7f) 
-			rigidbody2D.velocity = moveSpeed * transform.up;
+		//if (rigidbody2D.velocity.sqrMagnitude > 2f) 
+			rigidbody2D.velocity = moveSpeed * rigidbody2D.velocity.normalized;
 
 		velo = rigidbody2D.velocity.sqrMagnitude;
-
-		//CharacterController controller = GetComponent<CharacterController> ();
-		//controller.Move(transform.up * moveSpeed *  Time.deltaTime);
 
 
 

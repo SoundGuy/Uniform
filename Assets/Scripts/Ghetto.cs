@@ -46,6 +46,9 @@ public class Ghetto : MonoBehaviour {
 		}
 		jewsInGhetto++;
 
+		if (jewsInGhetto >= capacity) {
+			full = true;
+		}
 	}
 }
 
