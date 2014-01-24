@@ -42,7 +42,7 @@ public class RandomMove : MonoBehaviour {
 		lastcontacts = collision.contacts;
 		foreach (ContactPoint2D c in collision.contacts) {
 			if (c.collider.gameObject.name == "CageWall") {
-				Debug.Log("HitWall!!");
+				//Debug.Log("HitWall!!");
 			 	rigidbody2D.velocity = (bounceSpeed * c.normal );
 				ChooseRandomDirection();
 			}

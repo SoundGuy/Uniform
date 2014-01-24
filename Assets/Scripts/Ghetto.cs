@@ -10,6 +10,7 @@ public class Ghetto : MonoBehaviour {
 	public int capacity =5;
 	public int openAt = 3;
 	public Sprite openSprite;
+	public Sprite closedSprite;
 
 	public static Ghetto instance;
 
@@ -32,7 +33,7 @@ public class Ghetto : MonoBehaviour {
 
 		jews++;
 		Debug.Log("Jews = " + jews);
-		if (jews >= openAt) {
+		if (jews >= openAt && jewsInGhetto < capacity) {
 			GetComponent<SpriteRenderer>().sprite = openSprite;
 			open = true;
 		}
@@ -48,6 +49,7 @@ public class Ghetto : MonoBehaviour {
 
 		if (jewsInGhetto >= capacity) {
 			full = true;
+			GetComponent<SpriteRenderer>().sprite = closedSprite;
 		}
 	}
 }

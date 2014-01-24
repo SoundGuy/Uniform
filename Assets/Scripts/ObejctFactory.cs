@@ -17,9 +17,16 @@ public class ObejctFactory : MonoBehaviour {
 
 
 	Vector3 RandPosition(){
-		return new Vector3 (Random.Range (-7f, 7f), Random.Range (-5f, 5f), 0f);
+		Vector3 vec = new Vector3 (Random.Range (-7f, 7f), Random.Range (-5f, 5f), 0f);
 
 		// make sure position is outside Ghetto.
+		while (Ghetto.instance.GetComponent<BoxCollider2D>().OverlapPoint(new Vector2(vec.x,vec.y))) {
+			Debug.Log("had to choose a new one cause is in");
+			vec = new Vector3 (Random.Range (-7f, 7f), Random.Range (-5f, 5f), 0f);
+		}
+
+
+		return vec;
 	}
 
 	void createPeople () {
