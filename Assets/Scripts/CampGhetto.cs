@@ -121,7 +121,7 @@ public class CampGhetto : MonoBehaviour {
 
 	IEnumerator endGame() {
 		yield return new WaitForSeconds(9f);
-		GameObject.Find("Music").GetComponent<AudioSource>().Stop();
+		//GameObject.Find("Music").GetComponent<AudioSource>().Stop();
 		Application.LoadLevel("FinalSolution");
 	}
 }
