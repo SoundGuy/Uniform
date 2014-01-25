@@ -11,6 +11,7 @@ public class Ghetto : MonoBehaviour {
 	public int openAt = 3;
 	public Sprite openSprite;
 	public Sprite closedSprite;
+	public int ghettoIndex;
 
 	public static Ghetto instance;
 
@@ -39,7 +40,7 @@ public class Ghetto : MonoBehaviour {
 	public void markJew() {
 
 		jews++;
-		Debug.Log("Jews = " + jews);
+//		Debug.Log("Jews = " + jews);
 		if (jews >= openAt && jewsInGhetto < capacity) {
 			GetComponent<SpriteRenderer>().sprite = openSprite;
 			open = true;
@@ -55,6 +56,7 @@ public class Ghetto : MonoBehaviour {
 			return;
 		}
 		jewsInGhetto++;
+		GameState.instance.jewsInGhetto[GameState.instance.currentGhetto] = jewsInGhetto;
 
 		if (jewsInGhetto >= capacity) {
 			full = true;
