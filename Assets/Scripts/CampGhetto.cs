@@ -61,7 +61,7 @@ public class CampGhetto : MonoBehaviour {
 	void Update () {
 		if (gt != null) {
 			GetComponent<SpriteRenderer>().sprite = gt.full ? gt.closedSprite : gt.openSprite;
-			train.GetComponent<SpriteRenderer>().enabled = gt.full;				
+			train.GetComponent<SpriteRenderer>().enabled = gt.full || train.longTrainRunning;				
 			/*if (gt.full) {
 
 				if (train.longTrainRunning) 

@@ -62,6 +62,7 @@ public class Ghetto : MonoBehaviour {
 			full = true;
 			GetComponent<SpriteRenderer>().sprite = closedSprite;
 			label.text = "Scroll to zoom";
+			Application.LoadLevel("LevelPassPoster");
 		}
 	}
 }
