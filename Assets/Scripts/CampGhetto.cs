@@ -43,7 +43,18 @@ public class CampGhetto : MonoBehaviour {
 	void Update () {
 		if (gt != null) {
 			GetComponent<SpriteRenderer>().sprite = gt.full ? gt.closedSprite : gt.openSprite;
-			train.GetComponent<SpriteRenderer>().enabled = gt.full;
+			if (gt.full) {
+				if (train.longTrainRunning) 
+					train.GetComponent<SpriteRenderer>().enabled = true;
+				
+			} else {
+				if (train.longTrainRunning) {
+					train.GetComponent<SpriteRenderer>().enabled = true;
+				} else {
+					train.GetComponent<SpriteRenderer>().enabled = false;
+				}
+				      
+			}
 		}
 
 		Vector3 vec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -54,7 +65,8 @@ public class CampGhetto : MonoBehaviour {
 		if (jewObjects.Count == 0) {
 			if (clearing) {
 				train.GetComponent<SpriteRenderer>().sprite = train.yellowTrain;
-
+				train.RunTrain();
+				gt.full = false;
 			}
 			clearing = false;
 		}
@@ -62,6 +74,7 @@ public class CampGhetto : MonoBehaviour {
 		if (clearing && (Time.time - lastClearTime  > clearTimeInterval)) {
 			lastClearTime = Time.time;
 			// move jew
+			train.jews++;
 			GameObject obj = jewObjects[0];
 			jewObjects.RemoveAt(0);
 			Destroy(obj);
