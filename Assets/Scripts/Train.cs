@@ -34,6 +34,7 @@ public class Train : MonoBehaviour {
 	void Update () {
 		Vector3 vec1 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		if (Input.GetButtonDown("Fire1") &&  GetComponent<BoxCollider2D>().OverlapPoint(new Vector2(vec1.x,vec1.y))) {
+			GetComponent<SpriteRenderer>().sprite = yellowTrain;
 			ghetto.clearing = true;
 		}
 

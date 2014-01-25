@@ -113,10 +113,15 @@ public class CampGhetto : MonoBehaviour {
 
 
 			if (scoreLerp > 6000000) {
-				GameObject.Find("Music").GetComponent<AudioSource>().Stop();
-				Application.LoadLevel("FinalSolution");
+				StartCoroutine(endGame());
 			}
 		}
 
+	}
+
+	IEnumerator endGame() {
+		yield return new WaitForSeconds(9f);
+		GameObject.Find("Music").GetComponent<AudioSource>().Stop();
+		Application.LoadLevel("FinalSolution");
 	}
 }

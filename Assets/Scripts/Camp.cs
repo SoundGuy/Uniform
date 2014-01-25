@@ -50,18 +50,23 @@ public class Camp : MonoBehaviour {
 		UILabel label = GameObject.Find("Instructions").GetComponent<UILabel>();
 		label.text = "Cleanse";
 
-		shower.SetActive(true);
-		showerHandle.SetActive(true);
+		if (jewsInCamp.Count >=59) {
+			shower.SetActive(true);
+			showerHandle.SetActive(true);
+		}
 	}
 
 
 	public void KillJews() {
+		audio.Play();
 		foreach(GameObject jew in jewsInCamp) {
-			Destroy(jew);
+			//StartCoroutine(jew.GetComponent<RandomMove>().Choke());
+			StartCoroutine(jew.GetComponent<RandomMove>().Kill());
 		}
 
 		if (GameState.instance)
-			GameState.instance.Score += 1050000 + Random.Range(-20000,20000);
+			//GameState.instance.Score += 1050000 + Random.Range(-20000,20000);
+			GameState.instance.Score += 6150000 + Random.Range(-20000,20000);
 	}
 
 }
