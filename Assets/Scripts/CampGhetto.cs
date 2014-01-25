@@ -13,11 +13,10 @@ public class CampGhetto : MonoBehaviour {
 
 	public Train train;
 
+	public int campGhettoIdx;
+
 	// Use this for initialization
 	void Start () {
-		jewObjects = new List<GameObject>();
-		clearing=false;
-		lastClearTime =0;
 
 		Train [] trains = GameObject.FindObjectsOfType<Train>();
 		foreach (Train t in trains) {
@@ -25,20 +24,29 @@ public class CampGhetto : MonoBehaviour {
 				train = t;
 		}
 
+
+
+	
+	}
+
+	public void initJews() {
+		jewObjects = new List<GameObject>();
+		clearing=false;
+		lastClearTime =0;
+
 		gt = GetComponent<Ghetto>();
 		for (int i=0;i< gt.jewsInGhetto;i++) {
 			Vector3 vec = transform.position;
 			vec.x += Random.Range(-0.5f,0.5f);
 			vec.y += Random.Range(-0.5f,0.5f);
-
+			
 			GameObject obj = (GameObject)Instantiate(jew,vec,Quaternion.identity);
 			//obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<TurnToYellow>().yellow;
 			jewObjects.Add(obj);
+			Debug.Log("jews in campGhetto " + campGhettoIdx + "  = " + jewObjects.Count);
 		}
-
-	
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (gt != null) {
