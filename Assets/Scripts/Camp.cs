@@ -61,7 +61,7 @@ public class Camp : MonoBehaviour {
 		}
 
 		if (GameState.instance)
-			GameState.instance.Score += 1000000 + Random.Range(-20000,20000);
+			GameState.instance.Score += 1050000 + Random.Range(-20000,20000);
 	}
 
 }

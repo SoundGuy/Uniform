@@ -94,7 +94,12 @@ public class CampGhetto : MonoBehaviour {
 
 		if (GameState.instance) {
 			scoreLerp = Mathf.Lerp(scoreLerp,GameState.instance.Score,Time.deltaTime);
-			scoreLabel.text = scoreLerp.ToString("#,#");
+			scoreLabel.text = ((int)scoreLerp).ToString("#,#");
+
+			if (scoreLerp > 6000000) {
+				GameObject.Find("Music").GetComponent<AudioSource>().Stop();
+				Application.LoadLevel("FinalSolution");
+			}
 		}
 
 	}
