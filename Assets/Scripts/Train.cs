@@ -43,6 +43,7 @@ public class Train : MonoBehaviour {
 			if (jews == 0) {
 				unloading = false;
 				GetComponent<SpriteRenderer>().sprite = grayTrain;
+				GameObject.Find("Camp").GetComponent<Camp>().TrainUnloaded();
 			}
 
 
