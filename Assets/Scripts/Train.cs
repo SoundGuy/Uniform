@@ -40,7 +40,7 @@ public class Train : MonoBehaviour {
 		if (unloading) {
 			if (jews>0  && (Time.time - lastUnloadTime) > unloadTimeDelta) {
 				lastUnloadTime = Time.time;
-				Vector3 vec = transform.position;
+				Vector3 vec = Camp.instance.showerHandle.transform.position;
 				vec.y += offloadOffset;
 				GameObject jewAddedObj = (GameObject) Instantiate(jewPF,vec,Quaternion.identity);
 				GameObject.Find("Camp").GetComponent<Camp>().jewsInCamp.Add(jewAddedObj);
