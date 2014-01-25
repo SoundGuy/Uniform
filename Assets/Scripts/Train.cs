@@ -36,7 +36,8 @@ public class Train : MonoBehaviour {
 				lastUnloadTime = Time.time;
 				Vector3 vec = transform.position;
 				vec.y += offloadOffset;
-				Instantiate(jewPF,vec,Quaternion.identity);
+				GameObject jewAddedObj = (GameObject) Instantiate(jewPF,vec,Quaternion.identity);
+				GameObject.Find("Camp").GetComponent<Camp>().jewsInCamp.Add(jewAddedObj);
 				jews--;						
 			}
 

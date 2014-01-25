@@ -6,6 +6,8 @@ public class GameState : MonoBehaviour {
 	public int [] jewsInGhetto;
 	public int currentGhetto;
 
+	public int Score=3333333;
+
 	// Use this for initialization
 	void Start () {
 		Debug.Log("Game State Start Called");

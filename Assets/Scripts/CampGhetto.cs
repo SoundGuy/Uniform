@@ -15,6 +15,9 @@ public class CampGhetto : MonoBehaviour {
 
 	public int campGhettoIdx;
 
+	public UILabel scoreLabel;
+	public float scoreLerp;
+
 	// Use this for initialization
 	void Start () {
 
@@ -24,6 +27,7 @@ public class CampGhetto : MonoBehaviour {
 				train = t;
 		}
 
+		scoreLabel = GameObject.Find("Score").GetComponent<UILabel>();
 
 
 	
@@ -43,7 +47,7 @@ public class CampGhetto : MonoBehaviour {
 			GameObject obj = (GameObject)Instantiate(jew,vec,Quaternion.identity);
 			//obj.GetComponent<SpriteRenderer>().sprite = obj.GetComponent<TurnToYellow>().yellow;
 			jewObjects.Add(obj);
-			Debug.Log("jews in campGhetto " + campGhettoIdx + "  = " + jewObjects.Count);
+			//Debug.Log("jews in campGhetto " + campGhettoIdx + "  = " + jewObjects.Count);
 		}
 	}
 
@@ -87,6 +91,11 @@ public class CampGhetto : MonoBehaviour {
 			jewObjects.RemoveAt(0);
 			Destroy(obj);
 		}
-		
+
+		if (GameState.instance) {
+			scoreLerp = Mathf.Lerp(scoreLerp,GameState.instance.Score,Time.deltaTime);
+			scoreLabel.text = scoreLerp.ToString("#,#");
+		}
+
 	}
 }

@@ -1,13 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Camp : MonoBehaviour {
 
 	public Ghetto [] ghettos;
+	public GameObject shower;
+	public GameObject showerHandle;
+	public List<GameObject> jewsInCamp;
 
+	public static Camp instance;
 
 	// Use this for initialization
 	void Start () {
+		instance = this;
 
 		ghettos = new Ghetto[6];
 		int i=0;
@@ -31,6 +37,8 @@ public class Camp : MonoBehaviour {
 			i++;
 		}
 	
+
+		jewsInCamp = new List<GameObject>();
 	}
 	
 	// Update is called once per frame
@@ -41,5 +49,19 @@ public class Camp : MonoBehaviour {
 	public void TrainUnloaded() {
 		UILabel label = GameObject.Find("Instructions").GetComponent<UILabel>();
 		label.text = "Cleanse";
+
+		shower.SetActive(true);
+		showerHandle.SetActive(true);
 	}
+
+
+	public void KillJews() {
+		foreach(GameObject jew in jewsInCamp) {
+			Destroy(jew);
+		}
+
+		if (GameState.instance)
+			GameState.instance.Score += 1000000 + Random.Range(-20000,20000);
+	}
+
 }
