@@ -18,6 +18,10 @@ public class ShowerHandle : MonoBehaviour {
 			GetComponent<Animator>().SetBool("IsIdle",false);
 			Camp.instance.KillJews();
 
+		} else {
+			GetComponent<Animator>().SetBool("IsIdle",true);
 		}
 	}
+
+
 }

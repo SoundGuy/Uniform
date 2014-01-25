@@ -10,6 +10,7 @@ public class Train : MonoBehaviour {
 	public float unloadTimeDelta = 0.2f;
 	public bool unloading;
 	public float offloadOffset = -1f;
+	public CampGhetto ghetto;
 
 	public bool longTrainRunning;
 
@@ -31,6 +32,11 @@ public class Train : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Vector3 vec1 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		if (Input.GetButtonDown("Fire1") &&  GetComponent<BoxCollider2D>().OverlapPoint(new Vector2(vec1.x,vec1.y))) {
+			ghetto.clearing = true;
+		}
+
 		if (unloading) {
 			if (jews>0  && (Time.time - lastUnloadTime) > unloadTimeDelta) {
 				lastUnloadTime = Time.time;
