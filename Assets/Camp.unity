@@ -12,57 +12,68 @@ SceneSettings:
     backfaceThreshold: 100
 --- !u!104 &2
 RenderSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
   m_Fog: 0
   m_FogColor: {r: .5, g: .5, b: .5, a: 1}
   m_FogMode: 3
   m_FogDensity: .00999999978
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientLight: {r: .200000003, g: .200000003, b: .200000003, a: 1}
+  m_AmbientSkyColor: {r: .200000003, g: .200000003, b: .200000003, a: 1}
+  m_AmbientEquatorColor: {r: .200000003, g: .200000003, b: .200000003, a: 1}
+  m_AmbientGroundColor: {r: .200000003, g: .200000003, b: .200000003, a: 1}
+  m_AmbientIntensity: 1
+  m_AmbientMode: 3
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: .5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
-  m_SpotCookie: {fileID: 0}
-  m_ObjectHideFlags: 0
---- !u!127 &3
-LevelGameManager:
-  m_ObjectHideFlags: 0
+  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
+  m_DefaultReflectionMode: 0
+  m_DefaultReflectionResolution: 128
+  m_ReflectionBounces: 1
+  m_ReflectionIntensity: 1
+  m_CustomReflection: {fileID: 0}
+  m_Sun: {fileID: 0}
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
-  m_LightProbes: {fileID: 0}
-  m_Lightmaps: []
+  serializedVersion: 5
+  m_GIWorkflowMode: 1
   m_LightmapsMode: 1
-  m_BakedColorSpace: 0
-  m_UseDualLightmapsInForward: 0
+  m_GISettings:
+    serializedVersion: 2
+    m_BounceScale: 1
+    m_IndirectOutputScale: 1
+    m_AlbedoBoost: 1
+    m_TemporalCoherenceThreshold: 1
+    m_EnvironmentLightingMode: 0
+    m_EnableBakedLightmaps: 1
+    m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
-    m_Resolution: 50
-    m_LastUsedResolution: 0
+    serializedVersion: 3
+    m_Resolution: 1
+    m_BakeResolution: 50
     m_TextureWidth: 1024
     m_TextureHeight: 1024
-    m_BounceBoost: 1
-    m_BounceIntensity: 1
-    m_SkyLightColor: {r: .860000014, g: .930000007, b: 1, a: 1}
-    m_SkyLightIntensity: 0
-    m_Quality: 0
-    m_Bounces: 1
-    m_FinalGatherRays: 1000
-    m_FinalGatherContrastThreshold: .0500000007
-    m_FinalGatherGradientThreshold: 0
-    m_FinalGatherInterpolationPoints: 15
-    m_AOAmount: 0
-    m_AOMaxDistance: .100000001
-    m_AOContrast: 1
-    m_LODSurfaceMappingDistance: 1
-    m_Padding: 0
+    m_AOMaxDistance: 1
+    m_Padding: 2
+    m_CompAOExponent: 0
+    m_LightmapParameters: {fileID: 0}
     m_TextureCompression: 0
-    m_LockAtlas: 0
+    m_FinalGather: 0
+    m_FinalGatherRayCount: 1024
+    m_ReflectionCompression: 2
+  m_LightmapSnapshot: {fileID: 0}
+  m_RuntimeCPUUsage: 25
 --- !u!196 &5
 NavMeshSettings:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
+    serializedVersion: 2
     agentRadius: .5
     agentHeight: 2
     agentSlope: 45
@@ -71,84 +82,13 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     accuratePlacement: 0
     minRegionArea: 2
-    widthInaccuracy: 16.666666
-    heightInaccuracy: 10
-  m_NavMesh: {fileID: 0}
---- !u!1 &7570662
+    cellSize: .166666657
+    manualCellSize: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!1 &7570662 stripped
 GameObject:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100012, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
   m_PrefabInternal: {fileID: 1118136239}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 7570663}
-  - 212: {fileID: 7570665}
-  - 114: {fileID: 7570664}
-  - 61: {fileID: 7570666}
-  - 95: {fileID: 7570667}
-  m_Layer: 0
-  m_Name: train
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7570663
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400012, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  m_GameObject: {fileID: 7570662}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.90384459, y: -.0224111732, z: 0}
-  m_LocalScale: {x: 1.42857146, y: 1.42857122, z: 1.42857146}
-  m_Children: []
-  m_Father: {fileID: 1787018389}
-  m_RootOrder: 5
---- !u!114 &7570664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400004, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  m_GameObject: {fileID: 7570662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb676f95c22828147a0680344a7e1a26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  yellowTrain: {fileID: 21300000, guid: 6e24b0a976f6d4f449d5c1f55ced5801, type: 3}
-  grayTrain: {fileID: 21300000, guid: f0ed6b9796c0e2043a8eb0c1450779f9, type: 3}
-  jews: 0
-  jewPF: {fileID: 100000, guid: 197dda0e469629f43add23386ad2e95c, type: 2}
-  unloadTimeDelta: .200000003
-  unloading: 0
-  offloadOffset: -1
-  ghetto: {fileID: 0}
-  longTrainRunning: 0
---- !u!212 &7570665
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 21200002, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  m_GameObject: {fileID: 7570662}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f0ed6b9796c0e2043a8eb0c1450779f9, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!61 &7570666
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -158,8 +98,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 2.98023224e-08}
+  serializedVersion: 2
   m_Size: {x: .805555582, y: .194444448}
-  m_Center: {x: 0, y: 2.98023224e-08}
 --- !u!95 &7570667
 Animator:
   serializedVersion: 3
@@ -172,8 +114,11 @@ Animator:
   m_Controller: {fileID: 9100000, guid: e88ffe68dee599c45a636bbaaa4a6a28, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &121211326
 Prefab:
   m_ObjectHideFlags: 0
@@ -230,51 +175,13 @@ Prefab:
       propertyPath: m_Name
       value: GhettoCamp6
       objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_RootGameObject: {fileID: 311935900}
   m_IsPrefabParent: 0
-  m_IsExploded: 1
---- !u!1 &176669256
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100008, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 176669257}
-  - 61: {fileID: 176669258}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &176669257
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400008, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  m_GameObject: {fileID: 176669256}
-  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106829}
-  m_LocalPosition: {x: 1.2720865, y: 1.51644514e-07, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128031999, z: .128031999}
-  m_Children: []
-  m_Father: {fileID: 1441424665}
-  m_RootOrder: 2
---- !u!61 &176669258
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100006, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  m_GameObject: {fileID: 176669256}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
 --- !u!1 &210089996
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,8 +250,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
   m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
 --- !u!1 &230461294
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,16 +279,22 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
+  m_ReflectionProbeUsage: 0
+  m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 2546724047
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -1748243249
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7cec683a1682fde4eb4e2c2e14bbf21d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -420,8 +335,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
   m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
 --- !u!4 &298992685
 Transform:
   m_ObjectHideFlags: 0
@@ -434,39 +351,10 @@ Transform:
   m_Children: []
   m_Father: {fileID: 210089997}
   m_RootOrder: 2
---- !u!1 &311935900
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 311935901}
-  m_Layer: 8
-  m_Name: GhettoCamp6
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &311935901
+--- !u!4 &311935901 stripped
 Transform:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
   m_PrefabInternal: {fileID: 121211326}
-  m_GameObject: {fileID: 311935900}
-  m_LocalRotation: {x: 0, y: 0, z: .965925813, w: .258819073}
-  m_LocalPosition: {x: 5.59301519, y: -3.92075396, z: .302734375}
-  m_LocalScale: {x: .699999988, y: .700000107, z: .699999988}
-  m_Children:
-  - {fileID: 1352981807}
-  - {fileID: 1399874048}
-  - {fileID: 1931939239}
-  - {fileID: 630134379}
-  - {fileID: 1685089916}
-  - {fileID: 1792294341}
-  m_Father: {fileID: 320824976}
-  m_RootOrder: 0
 --- !u!1001 &315261986
 Prefab:
   m_ObjectHideFlags: 0
@@ -496,11 +384,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
       propertyPath: m_LocalRotation.z
-      value: .258819044
+      value: .258819073
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
       propertyPath: m_LocalRotation.w
-      value: .965925813
+      value: .965925872
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
       propertyPath: grayTrain
@@ -519,11 +407,13 @@ Prefab:
       propertyPath: m_Name
       value: GhettoCamp3
       objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_RootGameObject: {fileID: 514609579}
   m_IsPrefabParent: 0
-  m_IsExploded: 1
 --- !u!1 &320824975
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,93 +440,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 311935901}
+  - {fileID: 514609580}
   - {fileID: 1441424665}
   - {fileID: 1542756898}
-  - {fileID: 514609580}
-  - {fileID: 616830826}
   - {fileID: 1787018389}
+  - {fileID: 616830826}
   m_Father: {fileID: 0}
   m_RootOrder: 5
---- !u!1 &333453199
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100006, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 333453200}
-  - 61: {fileID: 333453201}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &333453200
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400006, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  m_GameObject: {fileID: 333453199}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.19725776, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128031999, z: .128031999}
-  m_Children: []
-  m_Father: {fileID: 514609580}
-  m_RootOrder: 1
---- !u!61 &333453201
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100004, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  m_GameObject: {fileID: 333453199}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
---- !u!1 &422675531
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100008, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 422675532}
-  - 61: {fileID: 422675533}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &422675532
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400008, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  m_GameObject: {fileID: 422675531}
-  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106829}
-  m_LocalPosition: {x: 1.2720865, y: 1.51644514e-07, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128031999, z: .128031999}
-  m_Children: []
-  m_Father: {fileID: 1542756898}
-  m_RootOrder: 2
---- !u!61 &422675533
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100006, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  m_GameObject: {fileID: 422675531}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
 --- !u!1 &447062923
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,46 +476,6 @@ Transform:
   - {fileID: 1563222318}
   m_Father: {fileID: 0}
   m_RootOrder: 7
---- !u!1 &460636700
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100006, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 460636702}
-  - 61: {fileID: 460636701}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!61 &460636701
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100004, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  m_GameObject: {fileID: 460636700}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
---- !u!4 &460636702
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400006, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  m_GameObject: {fileID: 460636700}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.19725776, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128031999, z: .128031999}
-  m_Children: []
-  m_Father: {fileID: 616830826}
-  m_RootOrder: 1
 --- !u!1 &474435063
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,8 +513,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
   m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
 --- !u!1 &488822631
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,15 +571,21 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
+  m_ReflectionProbeUsage: 0
+  m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a032bf4fa7d038f48b8015774a2958b2, type: 3}
@@ -854,13 +632,15 @@ AudioSource:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 495641360}
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3e4d288ab4bc4cf4c9ae11a5237a167d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -889,7 +669,7 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -905,39 +685,20 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!1 &514609579
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 514609580}
-  m_Layer: 8
-  m_Name: GhettoCamp3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &514609580
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!4 &514609580 stripped
 Transform:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
   m_PrefabInternal: {fileID: 315261986}
-  m_GameObject: {fileID: 514609579}
-  m_LocalRotation: {x: 0, y: 0, z: .258819044, w: .965925813}
-  m_LocalPosition: {x: -5.03196239, y: -3.89819455, z: .302734375}
-  m_LocalScale: {x: .699999988, y: .700000107, z: .699999988}
-  m_Children:
-  - {fileID: 634099142}
-  - {fileID: 333453200}
-  - {fileID: 892376306}
-  - {fileID: 708346453}
-  - {fileID: 975980451}
-  - {fileID: 733900505}
-  m_Father: {fileID: 320824976}
-  m_RootOrder: 3
 --- !u!1 &567814387
 GameObject:
   m_ObjectHideFlags: 0
@@ -975,316 +736,18 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
   m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
---- !u!1 &573889989
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100006, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 573889990}
-  - 61: {fileID: 573889991}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &573889990
+--- !u!4 &616830826 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400006, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  m_GameObject: {fileID: 573889989}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.19725776, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128031999, z: .128031999}
-  m_Children: []
-  m_Father: {fileID: 1441424665}
-  m_RootOrder: 1
---- !u!61 &573889991
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100004, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  m_GameObject: {fileID: 573889989}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
---- !u!1 &611368694
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100004, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 611368695}
-  - 61: {fileID: 611368696}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &611368695
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400004, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  m_GameObject: {fileID: 611368694}
-  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106829}
-  m_LocalPosition: {x: -1.24402571, y: -1.48299407e-07, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128031999, z: .128031999}
-  m_Children: []
-  m_Father: {fileID: 1441424665}
-  m_RootOrder: 3
---- !u!61 &611368696
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100002, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  m_GameObject: {fileID: 611368694}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
---- !u!1 &616830825
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 616830826}
-  m_Layer: 8
-  m_Name: GhettoCamp4
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &616830826
-Transform:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
   m_PrefabInternal: {fileID: 1368620995}
-  m_GameObject: {fileID: 616830825}
-  m_LocalRotation: {x: 0, y: 0, z: .965925813, w: -.258819044}
-  m_LocalPosition: {x: 5.63632679, y: 1.46316099, z: .302734375}
-  m_LocalScale: {x: .699999988, y: .700000107, z: .699999988}
-  m_Children:
-  - {fileID: 1180270787}
-  - {fileID: 460636702}
-  - {fileID: 1109571761}
-  - {fileID: 1851988310}
-  - {fileID: 2147217778}
-  - {fileID: 1068111145}
-  m_Father: {fileID: 320824976}
-  m_RootOrder: 4
---- !u!1 &630134378
+--- !u!1 &733900504 stripped
 GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100004, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 630134379}
-  - 61: {fileID: 630134380}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &630134379
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400004, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  m_GameObject: {fileID: 630134378}
-  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106829}
-  m_LocalPosition: {x: -1.24402571, y: -1.48299407e-07, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128031999, z: .128031999}
-  m_Children: []
-  m_Father: {fileID: 311935901}
-  m_RootOrder: 3
---- !u!61 &630134380
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100002, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  m_GameObject: {fileID: 630134378}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
---- !u!1 &634099141
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100010, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 634099142}
-  - 61: {fileID: 634099143}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &634099142
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400010, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  m_GameObject: {fileID: 634099141}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1785506, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128032178, z: .128032178}
-  m_Children: []
-  m_Father: {fileID: 514609580}
-  m_RootOrder: 0
---- !u!61 &634099143
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100008, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  m_GameObject: {fileID: 634099141}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
---- !u!1 &708346452
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100004, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 708346453}
-  - 61: {fileID: 708346454}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &708346453
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400004, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  m_GameObject: {fileID: 708346452}
-  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106829}
-  m_LocalPosition: {x: -1.24402571, y: -1.48299407e-07, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128031999, z: .128031999}
-  m_Children: []
-  m_Father: {fileID: 514609580}
-  m_RootOrder: 3
---- !u!61 &708346454
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100002, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  m_GameObject: {fileID: 708346452}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
---- !u!1 &733900504
-GameObject:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100012, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
   m_PrefabInternal: {fileID: 315261986}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 733900505}
-  - 212: {fileID: 733900507}
-  - 114: {fileID: 733900506}
-  - 95: {fileID: 733900508}
-  - 61: {fileID: 733900509}
-  m_Layer: 0
-  m_Name: train
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &733900505
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400012, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  m_GameObject: {fileID: 733900504}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.90384459, y: -.0224111732, z: 0}
-  m_LocalScale: {x: 1.42857146, y: 1.42857122, z: 1.42857146}
-  m_Children: []
-  m_Father: {fileID: 514609580}
-  m_RootOrder: 5
---- !u!114 &733900506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400004, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  m_GameObject: {fileID: 733900504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb676f95c22828147a0680344a7e1a26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  yellowTrain: {fileID: 21300000, guid: 6e24b0a976f6d4f449d5c1f55ced5801, type: 3}
-  grayTrain: {fileID: 21300000, guid: f0ed6b9796c0e2043a8eb0c1450779f9, type: 3}
-  jews: 0
-  jewPF: {fileID: 100000, guid: 197dda0e469629f43add23386ad2e95c, type: 2}
-  unloadTimeDelta: .200000003
-  unloading: 0
-  offloadOffset: -1
-  ghetto: {fileID: 0}
-  longTrainRunning: 0
---- !u!212 &733900507
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 21200002, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  m_GameObject: {fileID: 733900504}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f0ed6b9796c0e2043a8eb0c1450779f9, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!95 &733900508
 Animator:
   serializedVersion: 3
@@ -1297,8 +760,11 @@ Animator:
   m_Controller: {fileID: 9100000, guid: cb998d25be1c9df4d86d03c16ca32e06, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!61 &733900509
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1308,8 +774,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: -5.96046448e-08}
+  serializedVersion: 2
   m_Size: {x: .805555582, y: .194444448}
-  m_Center: {x: 0, y: -5.96046448e-08}
 --- !u!1001 &779834598
 Prefab:
   m_ObjectHideFlags: 0
@@ -1370,199 +838,17 @@ Prefab:
       propertyPath: m_Name
       value: GhettoCamp2
       objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_RootGameObject: {fileID: 1542756897}
   m_IsPrefabParent: 0
-  m_IsExploded: 1
---- !u!1 &863370126
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100000, guid: c677b53fa5c5bb74388b774e68489022, type: 2}
-  m_PrefabInternal: {fileID: 1425444833}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 863370133}
-  - 114: {fileID: 863370132}
-  - 212: {fileID: 863370131}
-  - 114: {fileID: 863370130}
-  - 50: {fileID: 863370129}
-  - 120: {fileID: 863370128}
-  - 58: {fileID: 863370127}
-  m_Layer: 9
-  m_Name: Triangle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!58 &863370127
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 5800000, guid: c677b53fa5c5bb74388b774e68489022,
-    type: 2}
-  m_PrefabInternal: {fileID: 1425444833}
-  m_GameObject: {fileID: 863370126}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Radius: .660000026
-  m_Center: {x: -.0299999993, y: -.0799999982}
---- !u!120 &863370128
-LineRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 12000000, guid: c677b53fa5c5bb74388b774e68489022,
-    type: 2}
-  m_PrefabInternal: {fileID: 1425444833}
-  m_GameObject: {fileID: 863370126}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 2100000, guid: 866366082dbb8334b88e2f30ed77cb65, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
-  m_Parameters:
-    startWidth: 1
-    endWidth: 1
-    m_StartColor:
-      serializedVersion: 2
-      rgba: 4294967295
-    m_EndColor:
-      serializedVersion: 2
-      rgba: 4294967295
-  m_UseWorldSpace: 1
---- !u!50 &863370129
-Rigidbody2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 5000000, guid: c677b53fa5c5bb74388b774e68489022,
-    type: 2}
-  m_PrefabInternal: {fileID: 1425444833}
-  m_GameObject: {fileID: 863370126}
-  m_Mass: .00999999978
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_FixedAngle: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
---- !u!114 &863370130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400002, guid: c677b53fa5c5bb74388b774e68489022,
-    type: 2}
-  m_PrefabInternal: {fileID: 1425444833}
-  m_GameObject: {fileID: 863370126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2ad52b494a323540985c82d09e8634a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  yellow: {fileID: 21300000, guid: 90ddba231e8730b468e880d6263a8b24, type: 3}
-  isYellow: 0
-  imSelected: 0
---- !u!212 &863370131
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 21200000, guid: c677b53fa5c5bb74388b774e68489022,
-    type: 2}
-  m_PrefabInternal: {fileID: 1425444833}
-  m_GameObject: {fileID: 863370126}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 2901185427
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8059d418d70bcfc479b5aee9fe7bbbc9, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &863370132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400000, guid: c677b53fa5c5bb74388b774e68489022,
-    type: 2}
-  m_PrefabInternal: {fileID: 1425444833}
-  m_GameObject: {fileID: 863370126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44d43c93fb3ee694fb1fcf66aa2de616, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 1
-  bounceSpeed: .5
-  velo: 0
---- !u!4 &863370133
+--- !u!4 &863370133 stripped
 Transform:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400000, guid: c677b53fa5c5bb74388b774e68489022, type: 2}
   m_PrefabInternal: {fileID: 1425444833}
-  m_GameObject: {fileID: 863370126}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .5, y: .5, z: .5}
-  m_Children: []
-  m_Father: {fileID: 447062924}
-  m_RootOrder: 0
---- !u!1 &892376305
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100008, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 892376306}
-  - 61: {fileID: 892376307}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &892376306
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400008, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  m_GameObject: {fileID: 892376305}
-  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106829}
-  m_LocalPosition: {x: 1.2720865, y: 1.51644514e-07, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128031999, z: .128031999}
-  m_Children: []
-  m_Father: {fileID: 514609580}
-  m_RootOrder: 2
---- !u!61 &892376307
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100006, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  m_GameObject: {fileID: 892376305}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
 --- !u!1 &924772574
 GameObject:
   m_ObjectHideFlags: 0
@@ -1589,7 +875,7 @@ Transform:
   m_GameObject: {fileID: 924772574}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00440528616, y: .00440528616, z: .00440528616}
+  m_LocalScale: {x: .00625000009, y: .00625000009, z: .00625000009}
   m_Children:
   - {fileID: 1925674415}
   m_Father: {fileID: 0}
@@ -1687,7 +973,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 963949337}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 110.000008, y: 192.000015, z: 0}
+  m_LocalPosition: {x: 110, y: 125, z: 0}
   m_LocalScale: {x: .999950051, y: .999950051, z: .999950051}
   m_Children: []
   m_Father: {fileID: 1925674415}
@@ -1752,301 +1038,10 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
---- !u!1 &975980450
+--- !u!1 &986841991 stripped
 GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100000, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 975980451}
-  - 212: {fileID: 975980454}
-  - 114: {fileID: 975980453}
-  - 61: {fileID: 975980452}
-  - 114: {fileID: 975980455}
-  m_Layer: 8
-  m_Name: GhettoInner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &975980451
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400000, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  m_GameObject: {fileID: 975980450}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .358500838, y: .358500838, z: .358500838}
-  m_Children: []
-  m_Father: {fileID: 514609580}
-  m_RootOrder: 4
---- !u!61 &975980452
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100000, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  m_GameObject: {fileID: 975980450}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Size: {x: 7.21999931, y: 6.80999947}
-  m_Center: {x: 0, y: 0}
---- !u!114 &975980453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400000, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  m_GameObject: {fileID: 975980450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9cc7f459d81156488c51c1ca932cd18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jews: 0
-  open: 0
-  full: 0
-  jewsInGhetto: 0
-  capacity: 10
-  openAt: 6
-  openSprite: {fileID: 21300000, guid: 2f29acd95d32af546a967c975dc0f36f, type: 3}
-  closedSprite: {fileID: 21300000, guid: 011847c0f4f8b0049858cf9147ced6e9, type: 3}
-  ghettoIndex: 0
---- !u!212 &975980454
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 21200000, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  m_GameObject: {fileID: 975980450}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2f29acd95d32af546a967c975dc0f36f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &975980455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400002, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 315261986}
-  m_GameObject: {fileID: 975980450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52889dd609cd8f45bb1e8c72a142d63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jew: {fileID: 100000, guid: 197dda0e469629f43add23386ad2e95c, type: 2}
-  jewGray: {fileID: 100000, guid: 47f122ba2277406408afa3e5eb3f866f, type: 2}
-  jewObjects: []
-  clearing: 0
-  lastClearTime: 0
-  clearTimeInterval: .25
-  train: {fileID: 0}
-  campGhettoIdx: 0
-  scoreLabel: {fileID: 0}
-  scoreLabel1: {fileID: 0}
-  scoreLerp: 0
---- !u!1 &986611993
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100000, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 986611994}
-  - 212: {fileID: 986611997}
-  - 114: {fileID: 986611996}
-  - 61: {fileID: 986611995}
-  - 114: {fileID: 986611998}
-  m_Layer: 8
-  m_Name: GhettoInner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &986611994
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400000, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  m_GameObject: {fileID: 986611993}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .358500838, y: .358500838, z: .358500838}
-  m_Children: []
-  m_Father: {fileID: 1542756898}
-  m_RootOrder: 4
---- !u!61 &986611995
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100000, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  m_GameObject: {fileID: 986611993}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Size: {x: 7.21999931, y: 6.80999947}
-  m_Center: {x: 0, y: 0}
---- !u!114 &986611996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400000, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  m_GameObject: {fileID: 986611993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9cc7f459d81156488c51c1ca932cd18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jews: 0
-  open: 0
-  full: 1
-  jewsInGhetto: 10
-  capacity: 10
-  openAt: 6
-  openSprite: {fileID: 21300000, guid: 2f29acd95d32af546a967c975dc0f36f, type: 3}
-  closedSprite: {fileID: 21300000, guid: 011847c0f4f8b0049858cf9147ced6e9, type: 3}
-  ghettoIndex: 0
---- !u!212 &986611997
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 21200000, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  m_GameObject: {fileID: 986611993}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2f29acd95d32af546a967c975dc0f36f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &986611998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400002, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  m_GameObject: {fileID: 986611993}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52889dd609cd8f45bb1e8c72a142d63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jew: {fileID: 100000, guid: 197dda0e469629f43add23386ad2e95c, type: 2}
-  jewGray: {fileID: 100000, guid: 47f122ba2277406408afa3e5eb3f866f, type: 2}
-  jewObjects: []
-  clearing: 0
-  lastClearTime: 0
-  clearTimeInterval: .25
-  train: {fileID: 0}
-  campGhettoIdx: 0
-  scoreLabel: {fileID: 0}
-  scoreLabel1: {fileID: 0}
-  scoreLerp: 0
---- !u!1 &986841991
-GameObject:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100012, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
   m_PrefabInternal: {fileID: 779834598}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 986841993}
-  - 212: {fileID: 986841992}
-  - 114: {fileID: 986841994}
-  - 95: {fileID: 986841995}
-  - 61: {fileID: 986841996}
-  m_Layer: 0
-  m_Name: train
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!212 &986841992
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 21200002, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  m_GameObject: {fileID: 986841991}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f0ed6b9796c0e2043a8eb0c1450779f9, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!4 &986841993
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400012, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  m_GameObject: {fileID: 986841991}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.90384459, y: -.0224111732, z: 0}
-  m_LocalScale: {x: 1.42857146, y: 1.42857122, z: 1.42857146}
-  m_Children: []
-  m_Father: {fileID: 1542756898}
-  m_RootOrder: 5
---- !u!114 &986841994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400004, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  m_GameObject: {fileID: 986841991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb676f95c22828147a0680344a7e1a26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  yellowTrain: {fileID: 21300000, guid: 6e24b0a976f6d4f449d5c1f55ced5801, type: 3}
-  grayTrain: {fileID: 21300000, guid: f0ed6b9796c0e2043a8eb0c1450779f9, type: 3}
-  jews: 0
-  jewPF: {fileID: 100000, guid: 197dda0e469629f43add23386ad2e95c, type: 2}
-  unloadTimeDelta: .200000003
-  unloading: 0
-  offloadOffset: -1
-  ghetto: {fileID: 0}
-  longTrainRunning: 0
 --- !u!95 &986841995
 Animator:
   serializedVersion: 3
@@ -2059,8 +1054,11 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 12a6c433291ac4049b321820fc3de85d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!61 &986841996
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2070,163 +1068,14 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
   m_Size: {x: .805555582, y: .194444448}
-  m_Center: {x: 0, y: 0}
---- !u!1 &1010381824
+--- !u!1 &1068111144 stripped
 GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100006, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1010381825}
-  - 61: {fileID: 1010381826}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1010381825
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400006, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  m_GameObject: {fileID: 1010381824}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.19725776, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128031999, z: .128031999}
-  m_Children: []
-  m_Father: {fileID: 1542756898}
-  m_RootOrder: 1
---- !u!61 &1010381826
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100004, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  m_GameObject: {fileID: 1010381824}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
---- !u!1 &1025502675
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100004, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1025502676}
-  - 61: {fileID: 1025502677}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1025502676
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400004, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  m_GameObject: {fileID: 1025502675}
-  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106829}
-  m_LocalPosition: {x: -1.24402571, y: -1.48299407e-07, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128031999, z: .128031999}
-  m_Children: []
-  m_Father: {fileID: 1787018389}
-  m_RootOrder: 3
---- !u!61 &1025502677
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100002, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  m_GameObject: {fileID: 1025502675}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
---- !u!1 &1068111144
-GameObject:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100012, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
   m_PrefabInternal: {fileID: 1368620995}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1068111145}
-  - 212: {fileID: 1068111147}
-  - 114: {fileID: 1068111146}
-  - 61: {fileID: 1068111148}
-  - 95: {fileID: 1068111149}
-  m_Layer: 0
-  m_Name: train
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1068111145
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400012, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  m_GameObject: {fileID: 1068111144}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.90384459, y: -.0224111732, z: 0}
-  m_LocalScale: {x: 1.42857146, y: 1.42857122, z: 1.42857146}
-  m_Children: []
-  m_Father: {fileID: 616830826}
-  m_RootOrder: 5
---- !u!114 &1068111146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400004, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  m_GameObject: {fileID: 1068111144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb676f95c22828147a0680344a7e1a26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  yellowTrain: {fileID: 21300000, guid: 6e24b0a976f6d4f449d5c1f55ced5801, type: 3}
-  grayTrain: {fileID: 21300000, guid: f0ed6b9796c0e2043a8eb0c1450779f9, type: 3}
-  jews: 0
-  jewPF: {fileID: 100000, guid: 197dda0e469629f43add23386ad2e95c, type: 2}
-  unloadTimeDelta: .200000003
-  unloading: 0
-  offloadOffset: -1
-  ghetto: {fileID: 0}
-  longTrainRunning: 0
---- !u!212 &1068111147
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 21200002, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  m_GameObject: {fileID: 1068111144}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f0ed6b9796c0e2043a8eb0c1450779f9, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!61 &1068111148
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2236,8 +1085,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: -1.49011612e-07}
+  serializedVersion: 2
   m_Size: {x: .805555522, y: .194444433}
-  m_Center: {x: 0, y: -1.49011612e-07}
 --- !u!95 &1068111149
 Animator:
   serializedVersion: 3
@@ -2250,48 +1101,11 @@ Animator:
   m_Controller: {fileID: 9100000, guid: a23a604a069f80a4d99122bfc48fd4c4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
---- !u!1 &1109571760
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100008, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1109571761}
-  - 61: {fileID: 1109571762}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1109571761
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400008, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  m_GameObject: {fileID: 1109571760}
-  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106829}
-  m_LocalPosition: {x: 1.2720865, y: 1.51644514e-07, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128031999, z: .128031999}
-  m_Children: []
-  m_Father: {fileID: 616830826}
-  m_RootOrder: 2
---- !u!61 &1109571762
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100006, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  m_GameObject: {fileID: 1109571760}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &1118136239
 Prefab:
   m_ObjectHideFlags: 0
@@ -2344,11 +1158,13 @@ Prefab:
       propertyPath: m_Name
       value: GhettoCamp5
       objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_RootGameObject: {fileID: 1787018388}
   m_IsPrefabParent: 0
-  m_IsExploded: 1
 --- !u!1 &1127009691
 GameObject:
   m_ObjectHideFlags: 0
@@ -2378,15 +1194,21 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
+  m_ReflectionProbeUsage: 0
+  m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 92b935cfe47020a48aebd81e2fc62ada, type: 3}
@@ -2412,7 +1234,8 @@ Animation:
   m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: 6af9b165664c3624ca85e5e7da6f71ed, type: 2}
-  m_Animations: []
+  m_Animations:
+  - {fileID: 7400000, guid: 6af9b165664c3624ca85e5e7da6f71ed, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -2429,8 +1252,11 @@ Animator:
   m_Controller: {fileID: 9100000, guid: b7bb42b14f17ac044a09e337a61dea6b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &1127009696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2451,88 +1277,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
   m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
---- !u!1 &1180270786
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100010, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1180270787}
-  - 61: {fileID: 1180270788}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1180270787
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400010, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  m_GameObject: {fileID: 1180270786}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1785506, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128032178, z: .128032178}
-  m_Children: []
-  m_Father: {fileID: 616830826}
-  m_RootOrder: 0
---- !u!61 &1180270788
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100008, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  m_GameObject: {fileID: 1180270786}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
---- !u!1 &1192328781
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100010, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1192328783}
-  - 61: {fileID: 1192328782}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!61 &1192328782
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100008, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  m_GameObject: {fileID: 1192328781}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
---- !u!4 &1192328783
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400010, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  m_GameObject: {fileID: 1192328781}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1785506, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128032178, z: .128032178}
-  m_Children: []
-  m_Father: {fileID: 1441424665}
-  m_RootOrder: 0
 --- !u!1 &1279006981
 GameObject:
   m_ObjectHideFlags: 0
@@ -2570,158 +1318,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
   m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
---- !u!1 &1297890866
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100000, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1297890867}
-  - 212: {fileID: 1297890870}
-  - 114: {fileID: 1297890869}
-  - 61: {fileID: 1297890868}
-  - 114: {fileID: 1297890871}
-  m_Layer: 8
-  m_Name: GhettoInner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1297890867
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400000, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  m_GameObject: {fileID: 1297890866}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .358500838, y: .358500838, z: .358500838}
-  m_Children: []
-  m_Father: {fileID: 1787018389}
-  m_RootOrder: 4
---- !u!61 &1297890868
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100000, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  m_GameObject: {fileID: 1297890866}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Size: {x: 7.21999931, y: 6.80999947}
-  m_Center: {x: 0, y: 0}
---- !u!114 &1297890869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400000, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  m_GameObject: {fileID: 1297890866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9cc7f459d81156488c51c1ca932cd18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jews: 0
-  open: 0
-  full: 0
-  jewsInGhetto: 0
-  capacity: 10
-  openAt: 6
-  openSprite: {fileID: 21300000, guid: 2f29acd95d32af546a967c975dc0f36f, type: 3}
-  closedSprite: {fileID: 21300000, guid: 011847c0f4f8b0049858cf9147ced6e9, type: 3}
-  ghettoIndex: 0
---- !u!212 &1297890870
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 21200000, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  m_GameObject: {fileID: 1297890866}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2f29acd95d32af546a967c975dc0f36f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &1297890871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400002, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  m_GameObject: {fileID: 1297890866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52889dd609cd8f45bb1e8c72a142d63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jew: {fileID: 100000, guid: 197dda0e469629f43add23386ad2e95c, type: 2}
-  jewGray: {fileID: 100000, guid: 47f122ba2277406408afa3e5eb3f866f, type: 2}
-  jewObjects: []
-  clearing: 0
-  lastClearTime: 0
-  clearTimeInterval: .25
-  train: {fileID: 0}
-  campGhettoIdx: 0
-  scoreLabel: {fileID: 0}
-  scoreLabel1: {fileID: 0}
-  scoreLerp: 0
---- !u!1 &1352981806
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100010, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1352981807}
-  - 61: {fileID: 1352981808}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1352981807
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400010, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  m_GameObject: {fileID: 1352981806}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1785506, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128032178, z: .128032178}
-  m_Children: []
-  m_Father: {fileID: 311935901}
-  m_RootOrder: 0
---- !u!61 &1352981808
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100008, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  m_GameObject: {fileID: 1352981806}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
 --- !u!1001 &1361853406
 Prefab:
   m_ObjectHideFlags: 0
@@ -2751,11 +1351,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -.258819044
+      value: -.258819073
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
       propertyPath: m_LocalRotation.w
-      value: .965925813
+      value: .965925872
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
       propertyPath: jewPF
@@ -2780,9 +1380,7 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_RootGameObject: {fileID: 1441424664}
   m_IsPrefabParent: 0
-  m_IsExploded: 1
 --- !u!1 &1367467416
 GameObject:
   m_ObjectHideFlags: 0
@@ -2810,15 +1408,21 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
+  m_ReflectionProbeUsage: 0
+  m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 550cb71383f1d674fbe489d1efafd4cd, type: 3}
@@ -2848,7 +1452,10 @@ Animator:
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!111 &1367467420
 Animation:
   m_ObjectHideFlags: 0
@@ -2858,7 +1465,8 @@ Animation:
   m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: 5c49deff837cf67489166d8434eaffeb, type: 2}
-  m_Animations: []
+  m_Animations:
+  - {fileID: 7400000, guid: 5c49deff837cf67489166d8434eaffeb, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -2892,11 +1500,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
       propertyPath: m_LocalRotation.z
-      value: .965925813
+      value: .965925872
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
       propertyPath: m_LocalRotation.w
-      value: -.258819044
+      value: -.258819073
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
       propertyPath: m_LocalScale.x
@@ -2923,11 +1531,13 @@ Prefab:
       propertyPath: m_Name
       value: GhettoCamp4
       objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_RootGameObject: {fileID: 616830825}
   m_IsPrefabParent: 0
-  m_IsExploded: 1
 --- !u!1 &1374950039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2951,10 +1561,10 @@ Light:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1374950039}
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 6
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: .5
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -2963,21 +1573,18 @@ Light:
     m_Resolution: -1
     m_Strength: 1
     m_Bias: .0500000007
-    m_Softness: 4
-    m_SoftnessFade: 1
+    m_NormalBias: .400000006
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
-  m_ActuallyLightmapped: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
   m_Lightmapping: 1
-  m_ShadowSamples: 1
+  m_BounceIntensity: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
-  m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
 --- !u!4 &1374950041
 Transform:
@@ -2991,46 +1598,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
---- !u!1 &1399874047
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100006, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1399874048}
-  - 61: {fileID: 1399874049}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1399874048
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400006, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  m_GameObject: {fileID: 1399874047}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.19725776, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128031999, z: .128031999}
-  m_Children: []
-  m_Father: {fileID: 311935901}
-  m_RootOrder: 1
---- !u!61 &1399874049
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100004, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  m_GameObject: {fileID: 1399874047}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
 --- !u!1001 &1425444833
 Prefab:
   m_ObjectHideFlags: 0
@@ -3072,42 +1639,11 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c677b53fa5c5bb74388b774e68489022, type: 2}
-  m_RootGameObject: {fileID: 863370126}
   m_IsPrefabParent: 0
-  m_IsExploded: 1
---- !u!1 &1441424664
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1441424665}
-  m_Layer: 8
-  m_Name: GhettoCamp1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1441424665
+--- !u!4 &1441424665 stripped
 Transform:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
   m_PrefabInternal: {fileID: 1361853406}
-  m_GameObject: {fileID: 1441424664}
-  m_LocalRotation: {x: 0, y: 0, z: -.258819044, w: .965925813}
-  m_LocalPosition: {x: -5.09268141, y: 1.45567751, z: .302734375}
-  m_LocalScale: {x: .699999988, y: .700000107, z: .699999988}
-  m_Children:
-  - {fileID: 1192328783}
-  - {fileID: 573889990}
-  - {fileID: 176669257}
-  - {fileID: 611368695}
-  - {fileID: 1751078567}
-  - {fileID: 1960524907}
-  m_Father: {fileID: 320824976}
-  m_RootOrder: 1
 --- !u!1 &1462958809
 GameObject:
   m_ObjectHideFlags: 0
@@ -3145,8 +1681,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
   m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
 --- !u!1 &1495780796
 GameObject:
   m_ObjectHideFlags: 0
@@ -3184,8 +1722,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
   m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
 --- !u!1 &1496705773
 GameObject:
   m_ObjectHideFlags: 0
@@ -3255,10 +1795,12 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
+  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!4 &1496705778
 Transform:
   m_ObjectHideFlags: 0
@@ -3294,256 +1836,14 @@ MonoBehaviour:
   scratchTexture: {fileID: 2800000, guid: 6205c27cc031f4e66b8ea90d1bfaa158, type: 3}
   shaderRGB: {fileID: 4800000, guid: 5d7f4c401ae8946bcb0d6ff68a9e7466, type: 3}
   shaderYUV: {fileID: 4800000, guid: 0e447868506ba49f0a73235b8a8b647a, type: 3}
---- !u!1 &1503045205
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100004, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1503045206}
-  - 61: {fileID: 1503045207}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1503045206
+--- !u!4 &1542756898 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400004, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  m_GameObject: {fileID: 1503045205}
-  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106829}
-  m_LocalPosition: {x: -1.24402571, y: -1.48299407e-07, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128031999, z: .128031999}
-  m_Children: []
-  m_Father: {fileID: 1542756898}
-  m_RootOrder: 3
---- !u!61 &1503045207
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100002, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  m_GameObject: {fileID: 1503045205}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
---- !u!1 &1542756897
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1542756898}
-  m_Layer: 8
-  m_Name: GhettoCamp2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1542756898
-Transform:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
   m_PrefabInternal: {fileID: 779834598}
-  m_GameObject: {fileID: 1542756897}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.91459084, y: -1.21880984, z: .302734375}
-  m_LocalScale: {x: .699999988, y: .700000107, z: .699999988}
-  m_Children:
-  - {fileID: 2144846639}
-  - {fileID: 1010381825}
-  - {fileID: 422675532}
-  - {fileID: 1503045206}
-  - {fileID: 986611994}
-  - {fileID: 986841993}
-  m_Father: {fileID: 320824976}
-  m_RootOrder: 2
---- !u!1 &1563222317
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100000, guid: 7fc972502f86c594d9a54f09e1f0fe60, type: 2}
-  m_PrefabInternal: {fileID: 2062395028}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1563222318}
-  - 114: {fileID: 1563222322}
-  - 212: {fileID: 1563222321}
-  - 50: {fileID: 1563222320}
-  - 58: {fileID: 1563222319}
-  m_Layer: 10
-  m_Name: Circle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1563222318
+--- !u!4 &1563222318 stripped
 Transform:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400000, guid: 7fc972502f86c594d9a54f09e1f0fe60, type: 2}
   m_PrefabInternal: {fileID: 2062395028}
-  m_GameObject: {fileID: 1563222317}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .5, y: .5, z: .5}
-  m_Children: []
-  m_Father: {fileID: 447062924}
-  m_RootOrder: 1
---- !u!58 &1563222319
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 5800000, guid: 7fc972502f86c594d9a54f09e1f0fe60,
-    type: 2}
-  m_PrefabInternal: {fileID: 2062395028}
-  m_GameObject: {fileID: 1563222317}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Radius: .5
-  m_Center: {x: 0, y: 0}
---- !u!50 &1563222320
-Rigidbody2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 5000000, guid: 7fc972502f86c594d9a54f09e1f0fe60,
-    type: 2}
-  m_PrefabInternal: {fileID: 2062395028}
-  m_GameObject: {fileID: 1563222317}
-  m_Mass: .00999999978
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_FixedAngle: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
---- !u!212 &1563222321
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 21200000, guid: 7fc972502f86c594d9a54f09e1f0fe60,
-    type: 2}
-  m_PrefabInternal: {fileID: 2062395028}
-  m_GameObject: {fileID: 1563222317}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 2901185427
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: bb90b217a62113b4782dabc634e1440e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &1563222322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400000, guid: 7fc972502f86c594d9a54f09e1f0fe60,
-    type: 2}
-  m_PrefabInternal: {fileID: 2062395028}
-  m_GameObject: {fileID: 1563222317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44d43c93fb3ee694fb1fcf66aa2de616, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 1
-  bounceSpeed: .5
-  velo: 0
---- !u!1 &1578305040
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100010, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1578305041}
-  - 61: {fileID: 1578305042}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1578305041
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400010, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  m_GameObject: {fileID: 1578305040}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1785506, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128032178, z: .128032178}
-  m_Children: []
-  m_Father: {fileID: 1787018389}
-  m_RootOrder: 0
---- !u!61 &1578305042
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100008, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  m_GameObject: {fileID: 1578305040}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
---- !u!1 &1607739943
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100008, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1607739944}
-  - 61: {fileID: 1607739945}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1607739944
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400008, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  m_GameObject: {fileID: 1607739943}
-  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106829}
-  m_LocalPosition: {x: 1.2720865, y: 1.51644514e-07, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128031999, z: .128031999}
-  m_Children: []
-  m_Father: {fileID: 1787018389}
-  m_RootOrder: 2
---- !u!61 &1607739945
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100006, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  m_GameObject: {fileID: 1607739943}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
 --- !u!1 &1680748438
 GameObject:
   m_ObjectHideFlags: 0
@@ -3581,336 +1881,18 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
   m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
---- !u!1 &1685089915
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100000, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1685089916}
-  - 212: {fileID: 1685089919}
-  - 114: {fileID: 1685089918}
-  - 61: {fileID: 1685089917}
-  - 114: {fileID: 1685089920}
-  m_Layer: 8
-  m_Name: GhettoInner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1685089916
+--- !u!4 &1787018389 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400000, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  m_GameObject: {fileID: 1685089915}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .358500838, y: .358500838, z: .358500838}
-  m_Children: []
-  m_Father: {fileID: 311935901}
-  m_RootOrder: 4
---- !u!61 &1685089917
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100000, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  m_GameObject: {fileID: 1685089915}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Size: {x: 7.21999931, y: 6.80999947}
-  m_Center: {x: 0, y: 0}
---- !u!114 &1685089918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400000, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  m_GameObject: {fileID: 1685089915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9cc7f459d81156488c51c1ca932cd18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jews: 0
-  open: 0
-  full: 0
-  jewsInGhetto: 0
-  capacity: 10
-  openAt: 6
-  openSprite: {fileID: 21300000, guid: 2f29acd95d32af546a967c975dc0f36f, type: 3}
-  closedSprite: {fileID: 21300000, guid: 011847c0f4f8b0049858cf9147ced6e9, type: 3}
-  ghettoIndex: 0
---- !u!212 &1685089919
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 21200000, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  m_GameObject: {fileID: 1685089915}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2f29acd95d32af546a967c975dc0f36f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &1685089920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400002, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  m_GameObject: {fileID: 1685089915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52889dd609cd8f45bb1e8c72a142d63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jew: {fileID: 100000, guid: 197dda0e469629f43add23386ad2e95c, type: 2}
-  jewGray: {fileID: 100000, guid: 47f122ba2277406408afa3e5eb3f866f, type: 2}
-  jewObjects: []
-  clearing: 0
-  lastClearTime: 0
-  clearTimeInterval: .25
-  train: {fileID: 0}
-  campGhettoIdx: 0
-  scoreLabel: {fileID: 0}
-  scoreLabel1: {fileID: 0}
-  scoreLerp: 0
---- !u!1 &1751078566
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100000, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1751078567}
-  - 212: {fileID: 1751078570}
-  - 114: {fileID: 1751078569}
-  - 61: {fileID: 1751078568}
-  - 114: {fileID: 1751078571}
-  m_Layer: 8
-  m_Name: GhettoInner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1751078567
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400000, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  m_GameObject: {fileID: 1751078566}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .358500838, y: .358500838, z: .358500838}
-  m_Children: []
-  m_Father: {fileID: 1441424665}
-  m_RootOrder: 4
---- !u!61 &1751078568
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100000, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  m_GameObject: {fileID: 1751078566}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Size: {x: 7.21999931, y: 6.80999947}
-  m_Center: {x: 0, y: 0}
---- !u!114 &1751078569
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400000, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  m_GameObject: {fileID: 1751078566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9cc7f459d81156488c51c1ca932cd18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jews: 0
-  open: 0
-  full: 0
-  jewsInGhetto: 0
-  capacity: 10
-  openAt: 6
-  openSprite: {fileID: 21300000, guid: 2f29acd95d32af546a967c975dc0f36f, type: 3}
-  closedSprite: {fileID: 21300000, guid: 011847c0f4f8b0049858cf9147ced6e9, type: 3}
-  ghettoIndex: 0
---- !u!212 &1751078570
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 21200000, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  m_GameObject: {fileID: 1751078566}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2f29acd95d32af546a967c975dc0f36f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &1751078571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400002, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  m_GameObject: {fileID: 1751078566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52889dd609cd8f45bb1e8c72a142d63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jew: {fileID: 100000, guid: 197dda0e469629f43add23386ad2e95c, type: 2}
-  jewGray: {fileID: 100000, guid: 47f122ba2277406408afa3e5eb3f866f, type: 2}
-  jewObjects: []
-  clearing: 0
-  lastClearTime: 0
-  clearTimeInterval: .25
-  train: {fileID: 0}
-  campGhettoIdx: 0
-  scoreLabel: {fileID: 0}
-  scoreLabel1: {fileID: 0}
-  scoreLerp: 0
---- !u!1 &1787018388
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1787018389}
-  m_Layer: 8
-  m_Name: GhettoCamp5
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1787018389
-Transform:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 400002, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
   m_PrefabInternal: {fileID: 1118136239}
-  m_GameObject: {fileID: 1787018388}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: -4.37113883e-08}
-  m_LocalPosition: {x: 7.42829895, y: -1.21881008, z: .302734375}
-  m_LocalScale: {x: .699999988, y: .700000107, z: .699999988}
-  m_Children:
-  - {fileID: 1578305041}
-  - {fileID: 2065907067}
-  - {fileID: 1607739944}
-  - {fileID: 1025502676}
-  - {fileID: 1297890867}
-  - {fileID: 7570663}
-  m_Father: {fileID: 320824976}
-  m_RootOrder: 5
---- !u!1 &1792294340
+--- !u!1 &1792294340 stripped
 GameObject:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100012, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
   m_PrefabInternal: {fileID: 121211326}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1792294341}
-  - 212: {fileID: 1792294343}
-  - 114: {fileID: 1792294342}
-  - 61: {fileID: 1792294344}
-  - 95: {fileID: 1792294345}
-  m_Layer: 0
-  m_Name: train
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1792294341
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400012, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  m_GameObject: {fileID: 1792294340}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.90384459, y: -.0224111732, z: 0}
-  m_LocalScale: {x: 1.42857146, y: 1.42857122, z: 1.42857146}
-  m_Children: []
-  m_Father: {fileID: 311935901}
-  m_RootOrder: 5
---- !u!114 &1792294342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400004, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  m_GameObject: {fileID: 1792294340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb676f95c22828147a0680344a7e1a26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  yellowTrain: {fileID: 21300000, guid: 6e24b0a976f6d4f449d5c1f55ced5801, type: 3}
-  grayTrain: {fileID: 21300000, guid: f0ed6b9796c0e2043a8eb0c1450779f9, type: 3}
-  jews: 0
-  jewPF: {fileID: 100000, guid: 197dda0e469629f43add23386ad2e95c, type: 2}
-  unloadTimeDelta: .200000003
-  unloading: 0
-  offloadOffset: -1
-  ghetto: {fileID: 0}
-  longTrainRunning: 0
---- !u!212 &1792294343
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 21200002, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  m_GameObject: {fileID: 1792294340}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f0ed6b9796c0e2043a8eb0c1450779f9, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!61 &1792294344
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3920,8 +1902,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -4.76837158e-07, y: 1.49011612e-07}
+  serializedVersion: 2
   m_Size: {x: .805555582, y: .194444448}
-  m_Center: {x: -4.76837158e-07, y: 1.49011612e-07}
 --- !u!95 &1792294345
 Animator:
   serializedVersion: 3
@@ -3934,48 +1918,11 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 769c839adc36db04989829b5f1c27d3a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
---- !u!1 &1851988309
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100004, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1851988310}
-  - 61: {fileID: 1851988311}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1851988310
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400004, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  m_GameObject: {fileID: 1851988309}
-  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106829}
-  m_LocalPosition: {x: -1.24402571, y: -1.48299407e-07, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128031999, z: .128031999}
-  m_Children: []
-  m_Father: {fileID: 616830826}
-  m_RootOrder: 3
---- !u!61 &1851988311
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100002, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  m_GameObject: {fileID: 1851988309}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1924543302
 GameObject:
   m_ObjectHideFlags: 0
@@ -4059,7 +2006,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1924543302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -100, y: 192.000015, z: 0}
+  m_LocalPosition: {x: -100, y: 125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1925674415}
@@ -4109,13 +2056,13 @@ MonoBehaviour:
     absolute: 42
   mColor: {r: .223529413, g: .20784314, b: .176470593, a: 1}
   mPivot: 7
-  mWidth: 1008
+  mWidth: 1093
   mHeight: 38
   mDepth: 0
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 26.5263157
+  aspectRatio: 28.7631588
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: d1500b8585a18e54b933518938586369, type: 3}
   mFont: {fileID: 0}
@@ -4147,7 +2094,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1924912838}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -223.000015, z: 0}
+  m_LocalPosition: {x: 0, y: -156, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1925674415}
@@ -4247,125 +2194,16 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
+  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
---- !u!1 &1931939238
+  m_StereoMirrorMode: 0
+--- !u!1 &1960524906 stripped
 GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100008, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1931939239}
-  - 61: {fileID: 1931939240}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1931939239
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400008, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  m_GameObject: {fileID: 1931939238}
-  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106829}
-  m_LocalPosition: {x: 1.2720865, y: 1.51644514e-07, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128031999, z: .128031999}
-  m_Children: []
-  m_Father: {fileID: 311935901}
-  m_RootOrder: 2
---- !u!61 &1931939240
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100006, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 121211326}
-  m_GameObject: {fileID: 1931939238}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
---- !u!1 &1960524906
-GameObject:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100012, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
   m_PrefabInternal: {fileID: 1361853406}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1960524907}
-  - 212: {fileID: 1960524909}
-  - 114: {fileID: 1960524908}
-  - 61: {fileID: 1960524910}
-  - 95: {fileID: 1960524911}
-  m_Layer: 0
-  m_Name: train
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1960524907
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400012, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  m_GameObject: {fileID: 1960524906}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.90384459, y: -.0224111732, z: 0}
-  m_LocalScale: {x: 1.42857146, y: 1.42857122, z: 1.42857146}
-  m_Children: []
-  m_Father: {fileID: 1441424665}
-  m_RootOrder: 5
---- !u!114 &1960524908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400004, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  m_GameObject: {fileID: 1960524906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb676f95c22828147a0680344a7e1a26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  yellowTrain: {fileID: 21300000, guid: 6e24b0a976f6d4f449d5c1f55ced5801, type: 3}
-  grayTrain: {fileID: 21300000, guid: f0ed6b9796c0e2043a8eb0c1450779f9, type: 3}
-  jews: 0
-  jewPF: {fileID: 100000, guid: 197dda0e469629f43add23386ad2e95c, type: 2}
-  unloadTimeDelta: .200000003
-  unloading: 0
-  offloadOffset: -1
-  ghetto: {fileID: 0}
-  longTrainRunning: 0
---- !u!212 &1960524909
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 21200002, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1361853406}
-  m_GameObject: {fileID: 1960524906}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f0ed6b9796c0e2043a8eb0c1450779f9, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!61 &1960524910
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4375,8 +2213,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 4.76837158e-07, y: 2.98023224e-07}
+  serializedVersion: 2
   m_Size: {x: .805555582, y: .194444448}
-  m_Center: {x: 4.76837158e-07, y: 2.98023224e-07}
 --- !u!95 &1960524911
 Animator:
   serializedVersion: 3
@@ -4389,8 +2229,11 @@ Animator:
   m_Controller: {fileID: 9100000, guid: f3108b141eaec054eb40f4a8165142b7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1973621303
 GameObject:
   m_ObjectHideFlags: 0
@@ -4467,8 +2310,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
   m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
 --- !u!1001 &2062395028
 Prefab:
   m_ObjectHideFlags: 0
@@ -4510,49 +2355,7 @@ Prefab:
       objectReference: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7fc972502f86c594d9a54f09e1f0fe60, type: 2}
-  m_RootGameObject: {fileID: 1563222317}
   m_IsPrefabParent: 0
-  m_IsExploded: 1
---- !u!1 &2065907066
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100006, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 2065907067}
-  - 61: {fileID: 2065907068}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2065907067
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400006, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  m_GameObject: {fileID: 2065907066}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.19725776, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128031999, z: .128031999}
-  m_Children: []
-  m_Father: {fileID: 1787018389}
-  m_RootOrder: 1
---- !u!61 &2065907068
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100004, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1118136239}
-  m_GameObject: {fileID: 2065907066}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
 --- !u!1 &2070553867
 GameObject:
   m_ObjectHideFlags: 0
@@ -4590,155 +2393,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
   m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
   m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
---- !u!1 &2144846638
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100010, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 2144846639}
-  - 61: {fileID: 2144846640}
-  m_Layer: 8
-  m_Name: GhettoWall
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2144846639
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400010, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  m_GameObject: {fileID: 2144846638}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1785506, z: 0}
-  m_LocalScale: {x: 2.60033393, y: .128032178, z: .128032178}
-  m_Children: []
-  m_Father: {fileID: 1542756898}
-  m_RootOrder: 0
---- !u!61 &2144846640
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100008, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 779834598}
-  m_GameObject: {fileID: 2144846638}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: fe5b3bf09c41799488cc64f5e98e7e3c, type: 2}
-  m_IsTrigger: 0
-  m_Size: {x: 1, y: 1}
-  m_Center: {x: 0, y: 0}
---- !u!1 &2147217777
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100000, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 2147217778}
-  - 212: {fileID: 2147217781}
-  - 114: {fileID: 2147217780}
-  - 61: {fileID: 2147217779}
-  - 114: {fileID: 2147217782}
-  m_Layer: 8
-  m_Name: GhettoInner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2147217778
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400000, guid: 534640f5f45104f4faac6aa7bf684cf5, type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  m_GameObject: {fileID: 2147217777}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .358500838, y: .358500838, z: .358500838}
-  m_Children: []
-  m_Father: {fileID: 616830826}
-  m_RootOrder: 4
---- !u!61 &2147217779
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6100000, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  m_GameObject: {fileID: 2147217777}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Size: {x: 7.21999931, y: 6.80999947}
-  m_Center: {x: 0, y: 0}
---- !u!114 &2147217780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400000, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  m_GameObject: {fileID: 2147217777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9cc7f459d81156488c51c1ca932cd18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jews: 0
-  open: 0
-  full: 0
-  jewsInGhetto: 0
-  capacity: 10
-  openAt: 6
-  openSprite: {fileID: 21300000, guid: 2f29acd95d32af546a967c975dc0f36f, type: 3}
-  closedSprite: {fileID: 21300000, guid: 011847c0f4f8b0049858cf9147ced6e9, type: 3}
-  ghettoIndex: 0
---- !u!212 &2147217781
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 21200000, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  m_GameObject: {fileID: 2147217777}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2f29acd95d32af546a967c975dc0f36f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &2147217782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400002, guid: 534640f5f45104f4faac6aa7bf684cf5,
-    type: 2}
-  m_PrefabInternal: {fileID: 1368620995}
-  m_GameObject: {fileID: 2147217777}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e52889dd609cd8f45bb1e8c72a142d63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jew: {fileID: 100000, guid: 197dda0e469629f43add23386ad2e95c, type: 2}
-  jewGray: {fileID: 100000, guid: 47f122ba2277406408afa3e5eb3f866f, type: 2}
-  jewObjects: []
-  clearing: 0
-  lastClearTime: 0
-  clearTimeInterval: .25
-  train: {fileID: 0}
-  campGhettoIdx: 0
-  scoreLabel: {fileID: 0}
-  scoreLabel1: {fileID: 0}
-  scoreLerp: 0

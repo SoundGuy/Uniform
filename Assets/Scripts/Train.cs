@@ -18,9 +18,9 @@ public class Train : MonoBehaviour {
 	void Start () {
 		unloading = false;
 		longTrainRunning=false;
-		if (animation) {
-			Debug.Log("Playing auto = " + animation.playAutomatically);
-			animation.playAutomatically = false;
+		if (GetComponent<Animation>()) {
+			Debug.Log("Playing auto = " + GetComponent<Animation>().playAutomatically);
+			GetComponent<Animation>().playAutomatically = false;
 		}
 
 		Animator a = GetComponent<Animator>();

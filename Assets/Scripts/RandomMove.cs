@@ -14,7 +14,7 @@ public class RandomMove : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		ChooseRandomDirection ();
-		rigidbody2D.AddForce(moveSpeed * transform.up);
+		GetComponent<Rigidbody2D>().AddForce(moveSpeed * transform.up);
 	
 	}
 
@@ -43,7 +43,7 @@ public class RandomMove : MonoBehaviour {
 		foreach (ContactPoint2D c in collision.contacts) {
 			if (c.collider.gameObject.name == "CageWall") {
 				//Debug.Log("HitWall!!");
-			 	rigidbody2D.velocity = (bounceSpeed * c.normal );
+			 	GetComponent<Rigidbody2D>().velocity = (bounceSpeed * c.normal );
 				ChooseRandomDirection();
 			}
 		}
@@ -76,9 +76,9 @@ public class RandomMove : MonoBehaviour {
 		}*/
 
 		//if (rigidbody2D.velocity.sqrMagnitude > 2f) 
-			rigidbody2D.velocity = moveSpeed * rigidbody2D.velocity.normalized;
+			GetComponent<Rigidbody2D>().velocity = moveSpeed * GetComponent<Rigidbody2D>().velocity.normalized;
 
-		velo = rigidbody2D.velocity.sqrMagnitude;
+		velo = GetComponent<Rigidbody2D>().velocity.sqrMagnitude;
 
 
 

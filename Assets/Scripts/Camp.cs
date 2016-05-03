@@ -58,7 +58,7 @@ public class Camp : MonoBehaviour {
 
 
 	public void KillJews() {
-		audio.Play();
+		GetComponent<AudioSource>().Play();
 		foreach(GameObject jew in jewsInCamp) {
 			//StartCoroutine(jew.GetComponent<RandomMove>().Choke());
 			StartCoroutine(jew.GetComponent<RandomMove>().Kill());
