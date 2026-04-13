@@ -1,7 +1,7 @@
-//----------------------------------------------
+//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2014 Tasharen Entertainment
-//----------------------------------------------
+// Copyright © 2011-2023 Tasharen Entertainment Inc
+//-------------------------------------------------
 
 using UnityEngine;
 using UnityEditor;
@@ -27,18 +27,36 @@ public class UIToggleInspector : UIWidgetContainerEditor
 		GUI.changed = false;
 
 		GUILayout.BeginHorizontal();
-		NGUIEditorTools.DrawProperty("Group", serializedObject, "group", GUILayout.Width(120f));
+		SerializedProperty sp = NGUIEditorTools.DrawProperty("Group", serializedObject, "group", GUILayout.Width(120f));
 		GUILayout.Label(" - zero means 'none'");
 		GUILayout.EndHorizontal();
+
+		EditorGUI.BeginDisabledGroup(sp.intValue == 0);
+		NGUIEditorTools.DrawProperty("  State of 'None'", serializedObject, "optionCanBeNone");
+		EditorGUI.EndDisabledGroup();
 
 		NGUIEditorTools.DrawProperty("Starting State", serializedObject, "startsActive");
 		NGUIEditorTools.SetLabelWidth(80f);
 
-		if (NGUIEditorTools.DrawHeader("State Transition"))
+		if (NGUIEditorTools.DrawMinimalisticHeader("State Transition"))
 		{
 			NGUIEditorTools.BeginContents();
-			NGUIEditorTools.DrawProperty("Sprite", serializedObject, "activeSprite");
-			NGUIEditorTools.DrawProperty("Animation", serializedObject, "activeAnimation");
+
+			var animator = serializedObject.FindProperty("animator");
+			var animation = serializedObject.FindProperty("activeAnimation");
+			var tween = serializedObject.FindProperty("tween");
+
+			var sprite = NGUIEditorTools.DrawProperty("Active Sprite", serializedObject, "activeSprite");
+			var inac = NGUIEditorTools.DrawProperty("Inactive Sprite", serializedObject, "inactiveSprite");
+
+			if (sprite.objectReferenceValue != null && inac.objectReferenceValue == null)
+			{
+				serializedObject.DrawProperty("invertSpriteState", "Invert State");
+			}
+
+			NGUIEditorTools.DrawProperty("Animator", animator, false);
+			NGUIEditorTools.DrawProperty("Animation", animation, false);
+			NGUIEditorTools.DrawProperty("Tween", tween, false);
 
 			if (serializedObject.isEditingMultipleObjects)
 			{
@@ -50,14 +68,14 @@ public class UIToggleInspector : UIWidgetContainerEditor
 				Transition tr = toggle.instantTween ? Transition.Instant : Transition.Smooth;
 				GUILayout.BeginHorizontal();
 				tr = (Transition)EditorGUILayout.EnumPopup("Transition", tr);
-				GUILayout.Space(18f);
+				NGUIEditorTools.DrawPadding();
 				GUILayout.EndHorizontal();
 
 				if (GUI.changed)
 				{
 					NGUIEditorTools.RegisterUndo("Toggle Change", toggle);
 					toggle.instantTween = (tr == Transition.Instant);
-					UnityEditor.EditorUtility.SetDirty(toggle);
+					NGUITools.SetDirty(toggle);
 				}
 			}
 			NGUIEditorTools.EndContents();

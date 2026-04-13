@@ -1,7 +1,7 @@
-//----------------------------------------------
+//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2014 Tasharen Entertainment
-//----------------------------------------------
+// Copyright © 2011-2023 Tasharen Entertainment Inc
+//-------------------------------------------------
 
 using UnityEngine;
 
@@ -12,25 +12,33 @@ using UnityEngine;
 [AddComponentMenu("NGUI/Interaction/Center Scroll View on Click")]
 public class UICenterOnClick : MonoBehaviour
 {
-	UIPanel mPanel;
-	UICenterOnChild mCenter;
-
-	void Start ()
-	{
-		mCenter = NGUITools.FindInParents<UICenterOnChild>(gameObject);
-		mPanel = NGUITools.FindInParents<UIPanel>(gameObject);
-	}
+	[Range(1f, 32f), Tooltip("The higher the value, the faster the spring animation will be")]
+	public float springStrength = 6f;
 
 	void OnClick ()
 	{
-		if (mCenter != null)
+		UICenterOnChild center = NGUITools.FindInParents<UICenterOnChild>(gameObject);
+		UIPanel panel = NGUITools.FindInParents<UIPanel>(gameObject);
+
+		if (center != null)
 		{
-			if (mCenter.enabled)
-				mCenter.CenterOn(transform);
+			if (center.enabled)
+				center.CenterOn(transform);
 		}
-		else if (mPanel != null && mPanel.clipping != UIDrawCall.Clipping.None)
+		else if (panel != null && panel.clipping != UIDrawCall.Clipping.None)
 		{
-			SpringPanel.Begin(mPanel.cachedGameObject, mPanel.cachedTransform.InverseTransformPoint(transform.position), 6f);
+			var sv = panel.GetComponentInParent<UIScrollView>();
+
+			if (!sv)
+			{
+				Debug.LogWarning("No scroll view found", this);
+				return;
+			}
+
+			var offset = -panel.cachedTransform.InverseTransformPoint(transform.position);
+			if (!sv.canMoveHorizontally) offset.x = panel.cachedTransform.localPosition.x;
+			if (!sv.canMoveVertically) offset.y = panel.cachedTransform.localPosition.y;
+			SpringPanel.Begin(panel.cachedGameObject, offset, springStrength);
 		}
 	}
 }

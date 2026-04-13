@@ -1,7 +1,7 @@
-//----------------------------------------------
+//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright ֲ© 2011-2014 Tasharen Entertainment
-//----------------------------------------------
+// Copyright © 2011-2023 Tasharen Entertainment Inc
+//-------------------------------------------------
 
 using UnityEngine;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ using System.Collections.Generic;
 [AddComponentMenu("NGUI/Interaction/NGUI Progress Bar")]
 public class UIProgressBar : UIWidgetContainer
 {
-	public enum FillDirection
+	[DoNotObfuscateNGUI] public enum FillDirection
 	{
 		LeftToRight,
 		RightToLeft,
@@ -47,10 +47,11 @@ public class UIProgressBar : UIWidgetContainer
 	[HideInInspector][SerializeField] protected float mValue = 1f;
 	[HideInInspector][SerializeField] protected FillDirection mFill = FillDirection.LeftToRight;
 
-	protected Transform mTrans;
-	protected bool mIsDirty = false;
-	protected Camera mCam;
-	protected float mOffset = 0f;
+	[System.NonSerialized] protected bool mStarted = false;
+	[System.NonSerialized] protected Transform mTrans;
+	[System.NonSerialized] protected bool mIsDirty = false;
+	[System.NonSerialized] protected Camera mCam;
+	[System.NonSerialized] protected float mOffset = 0f;
 
 	/// <summary>
 	/// Number of steps the slider should be divided into. For example 5 means possible values of 0, 0.25, 0.5, 0.75, and 1.0.
@@ -103,7 +104,7 @@ public class UIProgressBar : UIWidgetContainer
 			if (mFill != value)
 			{
 				mFill = value;
-				ForceUpdate();
+				if (mStarted) ForceUpdate();
 			}
 		}
 	}
@@ -119,23 +120,7 @@ public class UIProgressBar : UIWidgetContainer
 			if (numberOfSteps > 1) return Mathf.Round(mValue * (numberOfSteps - 1)) / (numberOfSteps - 1);
 			return mValue;
 		}
-		set
-		{
-			float val = Mathf.Clamp01(value);
-
-			if (mValue != val)
-			{
-				mValue = val;
-
-				if (EventDelegate.IsValid(onChange))
-				{
-					current = this;
-					EventDelegate.Execute(onChange);
-					current = null;
-				}
-				ForceUpdate();
-			}
-		}
+		set { Set(value); }
 	}
 
 	/// <summary>
@@ -152,26 +137,32 @@ public class UIProgressBar : UIWidgetContainer
 		}
 		set
 		{
+			Collider c;
+			Collider2D c2;
+
 			if (mFG != null)
 			{
 				mFG.alpha = value;
-				if (mFG.GetComponent<Collider>() != null) mFG.GetComponent<Collider>().enabled = mFG.alpha > 0.001f;
+				if (mFG.TryGetComponent(out c)) c.enabled = mFG.alpha > 0.001f;
+				else if (mFG.TryGetComponent(out c2)) c2.enabled = mFG.alpha > 0.001f;
 			}
 
 			if (mBG != null)
 			{
 				mBG.alpha = value;
-				if (mBG.GetComponent<Collider>() != null) mBG.GetComponent<Collider>().enabled = mBG.alpha > 0.001f;
+				if (mBG.TryGetComponent(out c)) c.enabled = mBG.alpha > 0.001f;
+				else if (mBG.TryGetComponent(out c2)) c2.enabled = mBG.alpha > 0.001f;
 			}
 
 			if (thumb != null)
 			{
-				UIWidget w = thumb.GetComponent<UIWidget>();
+				UIWidget w;
 				
-				if (w != null)
+				if (thumb.TryGetComponent(out w))
 				{
 					w.alpha = value;
-					if (w.GetComponent<Collider>() != null) w.GetComponent<Collider>().enabled = w.alpha > 0.001f;
+					if (w.TryGetComponent(out c)) c.enabled = w.alpha > 0.001f;
+					else if (w.TryGetComponent(out c2)) c2.enabled = w.alpha > 0.001f;
 				}
 			}
 		}
@@ -190,27 +181,65 @@ public class UIProgressBar : UIWidgetContainer
 	protected bool isInverted { get { return (mFill == FillDirection.RightToLeft || mFill == FillDirection.TopToBottom); } }
 
 	/// <summary>
+	/// Set the progress bar's value. If setting the initial value, call Start() first.
+	/// </summary>
+
+	public bool Set (float val, bool notify = true)
+	{
+		val = Mathf.Clamp01(val);
+
+		if (mValue != val)
+		{
+			float before = value;
+			mValue = val;
+
+			if (mStarted && before != value)
+			{
+				if (notify && NGUITools.GetActive(this) && EventDelegate.IsValid(onChange))
+				{
+					current = this;
+					EventDelegate.Execute(onChange);
+					current = null;
+				}
+
+				ForceUpdate();
+			}
+#if UNITY_EDITOR
+			if (!Application.isPlaying)
+				NGUITools.SetDirty(this);
+#endif
+			return true;
+		}
+		return false;
+	}
+
+	protected void OnEnable ()
+	{
+		if (mStarted && current == null && EventDelegate.IsValid(onChange))
+		{
+			current = this;
+			EventDelegate.Execute(onChange);
+			current = null;
+		}
+	}
+
+	/// <summary>
 	/// Register the event listeners.
 	/// </summary>
 
-	protected void Start ()
+	public void Start ()
 	{
+		if (mStarted) return;
+		mStarted = true;
 		Upgrade();
 
 		if (Application.isPlaying)
 		{
-			if (mFG == null)
-			{
-				Debug.LogWarning("Progress bar needs a foreground widget to work with", this);
-				enabled = false;
-				return;
-			}
-
 			if (mBG != null) mBG.autoResizeBoxCollider = true;
 
 			OnStart();
 
-			if (onChange != null)
+			if (current == null && EventDelegate.IsValid(onChange))
 			{
 				current = this;
 				EventDelegate.Execute(onChange);
@@ -259,7 +288,7 @@ public class UIProgressBar : UIWidgetContainer
 			float val = Mathf.Clamp01(mValue);
 			if (mValue != val) mValue = val;
 			if (numberOfSteps < 0) numberOfSteps = 0;
-			else if (numberOfSteps > 20) numberOfSteps = 20;
+			else if (numberOfSteps > 21) numberOfSteps = 21;
 			ForceUpdate();
 		}
 		else
@@ -267,7 +296,7 @@ public class UIProgressBar : UIWidgetContainer
 			float val = Mathf.Clamp01(mValue);
 			if (mValue != val) mValue = val;
 			if (numberOfSteps < 0) numberOfSteps = 0;
-			else if (numberOfSteps > 20) numberOfSteps = 20;
+			else if (numberOfSteps > 21) numberOfSteps = 21;
 		}
 	}
 
@@ -298,8 +327,8 @@ public class UIProgressBar : UIWidgetContainer
 	{
 		if (mFG != null)
 		{
-			Vector3[] corners = mFG.localCorners;
-			Vector3 size = (corners[2] - corners[0]);
+			var corners = mFG.localCorners;
+			var size = (corners[2] - corners[0]);
 
 			if (isHorizontal)
 			{
@@ -322,37 +351,61 @@ public class UIProgressBar : UIWidgetContainer
 	public virtual void ForceUpdate ()
 	{
 		mIsDirty = false;
+		var turnOff = false;
+
+		var fgSprite = mFG as UIBasicSprite;
 
 		if (mFG != null)
 		{
-			UISprite sprite = mFG as UISprite;
-
 			if (isHorizontal)
 			{
-				if (sprite != null && sprite.type == UISprite.Type.Filled)
+				if (fgSprite != null && fgSprite.type == UIBasicSprite.Type.Filled)
 				{
-					sprite.fillDirection = UISprite.FillDirection.Horizontal;
-					sprite.invert = isInverted;
-					sprite.fillAmount = value;
+					if (fgSprite.fillDirection == UIBasicSprite.FillDirection.Horizontal ||
+						fgSprite.fillDirection == UIBasicSprite.FillDirection.Vertical)
+					{
+						fgSprite.fillDirection = UIBasicSprite.FillDirection.Horizontal;
+						fgSprite.invert = isInverted;
+					}
+					fgSprite.fillAmount = value;
 				}
 				else
 				{
 					mFG.drawRegion = isInverted ?
 						new Vector4(1f - value, 0f, 1f, 1f) :
 						new Vector4(0f, 0f, value, 1f);
+					mFG.enabled = true;
+					turnOff = value < 0.001f;
 				}
 			}
-			else if (sprite != null && sprite.type == UISprite.Type.Filled)
+			else if (fgSprite != null && fgSprite.type == UIBasicSprite.Type.Filled)
 			{
-				sprite.fillDirection = UISprite.FillDirection.Vertical;
-				sprite.invert = isInverted;
-				sprite.fillAmount = value;
+				if (fgSprite.fillDirection == UIBasicSprite.FillDirection.Horizontal ||
+					fgSprite.fillDirection == UIBasicSprite.FillDirection.Vertical)
+				{
+					fgSprite.fillDirection = UIBasicSprite.FillDirection.Vertical;
+					fgSprite.invert = isInverted;
+				}
+				fgSprite.fillAmount = value;
 			}
 			else
 			{
 				mFG.drawRegion = isInverted ?
 					new Vector4(0f, 1f - value, 1f, 1f) :
 					new Vector4(0f, 0f, 1f, value);
+				mFG.enabled = true;
+				turnOff = value < 0.001f;
+			}
+		}
+
+		// Automatically invert the fill amount on the background sprite
+		if (mBG != null)
+		{
+			var bgSprite = mBG as UIBasicSprite;
+
+			if (bgSprite != null && fgSprite != null && bgSprite.invert != fgSprite.invert && bgSprite.type == UIBasicSprite.Type.Filled && fgSprite.type == UIBasicSprite.Type.Filled)
+			{
+				bgSprite.fillAmount = 1f - fgSprite.fillAmount;
 			}
 		}
 
@@ -387,6 +440,8 @@ public class UIProgressBar : UIWidgetContainer
 				SetThumbPosition(Vector3.Lerp(v0, v1, isInverted ? 1f - value : value));
 			}
 		}
+
+		if (turnOff) mFG.enabled = false;
 	}
 
 	/// <summary>
@@ -409,5 +464,47 @@ public class UIProgressBar : UIWidgetContainer
 		}
 		else if (Vector3.Distance(thumb.position, worldPos) > 0.00001f)
 			thumb.position = worldPos;
+	}
+
+	/// <summary>
+	/// Watch for key events and adjust the value accordingly.
+	/// </summary>
+
+	public virtual void OnPan (Vector2 delta)
+	{
+		if (enabled)
+		{
+			switch (mFill)
+			{
+				case FillDirection.LeftToRight:
+				{
+					float after = Mathf.Clamp01(mValue + delta.x);
+					value = after;
+					mValue = after;
+					break;
+				}
+				case FillDirection.RightToLeft:
+				{
+					float after = Mathf.Clamp01(mValue - delta.x);
+					value = after;
+					mValue = after;
+					break;
+				}
+				case FillDirection.BottomToTop:
+				{
+					float after = Mathf.Clamp01(mValue + delta.y);
+					value = after;
+					mValue = after;
+					break;
+				}
+				case FillDirection.TopToBottom:
+				{
+					float after = Mathf.Clamp01(mValue - delta.y);
+					value = after;
+					mValue = after;
+					break;
+				}
+			}
+		}
 	}
 }

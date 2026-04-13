@@ -1,7 +1,7 @@
-//----------------------------------------------
+//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2014 Tasharen Entertainment
-//----------------------------------------------
+// Copyright © 2011-2023 Tasharen Entertainment Inc
+//-------------------------------------------------
 
 #if !UNITY_3_5 && !UNITY_FLASH
 #define DYNAMIC_FONT
@@ -19,7 +19,7 @@ using System.Text;
 [AddComponentMenu("NGUI/UI/Text List")]
 public class UITextList : MonoBehaviour
 {
-	public enum Style
+	[DoNotObfuscateNGUI] public enum Style
 	{
 		Text,
 		Chat,
@@ -47,7 +47,7 @@ public class UITextList : MonoBehaviour
 	/// Maximum number of chat log entries to keep before discarding them.
 	/// </summary>
 
-	public int paragraphHistory = 50;
+	public int paragraphHistory = 100;
 
 	// Text list is made up of paragraphs
 	protected class Paragraph
@@ -56,12 +56,47 @@ public class UITextList : MonoBehaviour
 		public string[] lines;	// Split lines
 	}
 
-	protected char[] mSeparator = new char[] { '\n' };
-	protected BetterList<Paragraph> mParagraphs = new BetterList<Paragraph>();
-	protected float mScroll = 0f;
-	protected int mTotalLines = 0;
-	protected int mLastWidth = 0;
-	protected int mLastHeight = 0;
+	[System.NonSerialized] protected char[] mSeparator = new char[] { '\n' };
+	[System.NonSerialized] protected float mScroll = 0f;
+	[System.NonSerialized] protected int mTotalLines = 0;
+	[System.NonSerialized] protected int mLastWidth = 0;
+	[System.NonSerialized] protected int mLastHeight = 0;
+	[System.NonSerialized] protected int mLastSize = 0;
+	[System.NonSerialized] protected BetterList<Paragraph> mParagraphs;
+	[System.NonSerialized] protected bool mStarted = false;
+
+	/// <summary>
+	/// Chat history is in a dictionary so that there can be multiple chat window tabs, each with its own text list.
+	/// The dictionary is static so that it travels from one scene to another without losing chat history.
+	/// </summary>
+
+	static Dictionary<string, BetterList<Paragraph>> mHistory = new Dictionary<string, BetterList<Paragraph>>();
+
+	/// <summary>
+	/// Paragraphs belonging to this text list.
+	/// </summary>
+
+	protected BetterList<Paragraph> paragraphs
+	{
+		get
+		{
+			if (mParagraphs == null)
+			{
+				if (!mHistory.TryGetValue(name, out mParagraphs))
+				{
+					mParagraphs = new BetterList<Paragraph>();
+					mHistory.Add(name, mParagraphs);
+				}
+			}
+			return mParagraphs;
+		}
+	}
+
+	/// <summary>
+	/// Return the number of paragraphs currently in the text list.
+	/// </summary>
+
+	public int paragraphCount { get { return paragraphs.size; } }
 
 	/// <summary>
 	/// Whether the text list is usable.
@@ -106,7 +141,7 @@ public class UITextList : MonoBehaviour
 	/// Height of each line.
 	/// </summary>
 
-	protected float lineHeight { get { return (textLabel != null) ? textLabel.fontSize + textLabel.spacingY : 20f; } }
+	protected float lineHeight { get { return (textLabel != null) ? textLabel.fontSize + textLabel.effectiveSpacingY : 20f; } }
 
 	/// <summary>
 	/// Height of the scrollable area (outside of the visible area's bounds).
@@ -128,7 +163,7 @@ public class UITextList : MonoBehaviour
 
 	public void Clear ()
 	{
-		mParagraphs.Clear();
+		paragraphs.Clear();
 		UpdateVisibleText();
 	}
 
@@ -138,6 +173,8 @@ public class UITextList : MonoBehaviour
 
 	void Start ()
 	{
+		mStarted = true;
+
 		if (textLabel == null)
 			textLabel = GetComponentInChildren<UILabel>();
 
@@ -156,6 +193,8 @@ public class UITextList : MonoBehaviour
 			textLabel.pivot = UIWidget.Pivot.TopLeft;
 			scrollValue = 0f;
 		}
+
+		Rebuild();
 	}
 
 	/// <summary>
@@ -164,25 +203,18 @@ public class UITextList : MonoBehaviour
 
 	void Update ()
 	{
-		if (isValid)
-		{
-			if (textLabel.width != mLastWidth || textLabel.height != mLastHeight)
-			{
-				mLastWidth = textLabel.width;
-				mLastHeight = textLabel.height;
-				Rebuild();
-			}
-		}
+		if (isValid && (textLabel.width != mLastWidth || textLabel.height != mLastHeight || textLabel.fontSize != mLastSize))
+			Rebuild();
 	}
 
 	/// <summary>
 	/// Allow scrolling of the text list.
 	/// </summary>
 
-	void OnScroll (float val)
+	public void OnScroll (float val)
 	{
 		int sh = scrollHeight;
-		
+
 		if (sh != 0)
 		{
 			val *= lineHeight;
@@ -194,7 +226,7 @@ public class UITextList : MonoBehaviour
 	/// Allow dragging of the text list.
 	/// </summary>
 
-	void OnDrag (Vector2 delta)
+	public void OnDrag (Vector2 delta)
 	{
 		int sh = scrollHeight;
 
@@ -219,23 +251,17 @@ public class UITextList : MonoBehaviour
 	/// Add a new paragraph.
 	/// </summary>
 
-	public void Add (string text) { Add(text, true); }
-
-	/// <summary>
-	/// Add a new paragraph.
-	/// </summary>
-
-	protected void Add (string text, bool updateVisible)
+	public void Add (string text)
 	{
 		Paragraph ce = null;
 
-		if (mParagraphs.size < paragraphHistory)
+		if (paragraphs.size < paragraphHistory)
 		{
 			ce = new Paragraph();
 		}
 		else
 		{
-			ce = mParagraphs[0];
+			ce = mParagraphs.buffer[0];
 			mParagraphs.RemoveAt(0);
 		}
 
@@ -250,41 +276,36 @@ public class UITextList : MonoBehaviour
 
 	protected void Rebuild ()
 	{
+		if (!mStarted) return;
+
 		if (isValid)
 		{
+			mLastWidth = textLabel.width;
+			mLastHeight = textLabel.height;
+			mLastSize = textLabel.fontSize;
+
 			// Although we could simply use UILabel.Wrap, it would mean setting the same data
 			// over and over every paragraph, which is not ideal. It's faster to only do it once
 			// and then do wrapping ourselves in the 'for' loop below.
 			textLabel.UpdateNGUIText();
 			NGUIText.rectHeight = 1000000;
+			NGUIText.regionHeight = 1000000;
 			mTotalLines = 0;
-			bool success = true;
 
-			for (int i = 0; i < mParagraphs.size; ++i)
+			for (int i = 0; i < paragraphs.size; ++i)
 			{
 				string final;
 				Paragraph p = mParagraphs.buffer[i];
-
-				if (NGUIText.WrapText(p.text, out final))
-				{
-					p.lines = final.Split('\n');
-					mTotalLines += p.lines.Length;
-				}
-				else
-				{
-					success = false;
-					break;
-				}
+				NGUIText.tint = Color.white;
+				NGUIText.WrapText(p.text, out final, false, true);
+				p.lines = final.Split('\n');
+				mTotalLines += p.lines.Length;
 			}
 
 			// Recalculate the total number of lines
 			mTotalLines = 0;
-
-			if (success)
-			{
-				for (int i = 0, imax = mParagraphs.size; i < imax; ++i)
-					mTotalLines += mParagraphs.buffer[i].lines.Length;
-			}
+			for (int i = 0, imax = mParagraphs.size; i < imax; ++i)
+				mTotalLines += mParagraphs.buffer[i].lines.Length;
 
 			// Update the bar's size
 			if (scrollBar != null)
@@ -319,7 +340,7 @@ public class UITextList : MonoBehaviour
 
 			StringBuilder final = new StringBuilder();
 
-			for (int i = 0, imax = mParagraphs.size; maxLines > 0 && i < imax; ++i)
+			for (int i = 0, imax = paragraphs.size; maxLines > 0 && i < imax; ++i)
 			{
 				Paragraph p = mParagraphs.buffer[i];
 

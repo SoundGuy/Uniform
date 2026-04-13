@@ -1,10 +1,9 @@
-//----------------------------------------------
+//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright ֲ© 2011-2014 Tasharen Entertainment
-//----------------------------------------------
+// Copyright © 2011-2023 Tasharen Entertainment Inc
+//-------------------------------------------------
 
 using UnityEngine;
-using System.Collections.Generic;
 
 /// <summary>
 /// Scroll bar functionality.
@@ -27,9 +26,16 @@ public class UIScrollBar : UISlider
 	// Deprecated functionality
 	[HideInInspector][SerializeField] float mScroll = 0f;
 	[HideInInspector][SerializeField] Direction mDir = Direction.Upgraded;
+	[HideInInspector][SerializeField] float mMouseScroll = 0.1f;
 
 	[System.Obsolete("Use 'value' instead")]
 	public float scrollValue { get { return this.value; } set { this.value = value; } }
+
+	/// <summary>
+	/// Amount by which the scroll bar will scroll with the mouse scrollwheel.
+	/// </summary>
+
+	public float mouseScroll { get { return mMouseScroll; } set { mMouseScroll = value; } }
 
 	/// <summary>
 	/// The size of the foreground bar in percent (0-1 range).
@@ -50,13 +56,20 @@ public class UIScrollBar : UISlider
 				mSize = val;
 				mIsDirty = true;
 
-				if (onChange != null)
+				if (NGUITools.GetActive(this))
 				{
-					current = this;
-					EventDelegate.Execute(onChange);
-					current = null;
+					if (current == null && onChange != null)
+					{
+						current = this;
+						EventDelegate.Execute(onChange);
+						current = null;
+					}
+					ForceUpdate();
+#if UNITY_EDITOR
+					if (!Application.isPlaying)
+						NGUITools.SetDirty(this);
+#endif
 				}
-				if (!Application.isPlaying) ForceUpdate();
 			}
 		}
 	}
@@ -81,7 +94,7 @@ public class UIScrollBar : UISlider
 			}
 			mDir = Direction.Upgraded;
 #if UNITY_EDITOR
-			UnityEditor.EditorUtility.SetDirty(this);
+			NGUITools.SetDirty(this);
 #endif
 		}
 	}
@@ -94,8 +107,15 @@ public class UIScrollBar : UISlider
 	{
 		base.OnStart();
 
-		if (mFG != null && mFG.GetComponent<Collider>() != null && mFG.gameObject != gameObject)
+		if (mFG != null && mFG.gameObject != gameObject)
 		{
+#if UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7
+			bool hasCollider = (mFG.collider != null) || (mFG.GetComponent<Collider2D>() != null);
+#else
+			bool hasCollider = (mFG.GetComponent<Collider>() != null) || (mFG.GetComponent<Collider2D>() != null);
+#endif
+			if (!hasCollider) return;
+
 			UIEventListener fgl = UIEventListener.Get(mFG.gameObject);
 			fgl.onPress += OnPressForeground;
 			fgl.onDrag += OnDragForeground;
@@ -180,5 +200,16 @@ public class UIScrollBar : UISlider
 			}
 		}
 		else base.ForceUpdate();
+	}
+
+	protected void OnScroll (float amount)
+	{
+		if (mMouseScroll != 0f) value += amount * mMouseScroll;
+	}
+
+	public override void OnPan (Vector2 delta)
+	{
+		delta *= Mathf.Lerp(1f, 10f, Mathf.Max(0f, barSize - 0.65f) / 0.35f);
+		base.OnPan(delta);
 	}
 }

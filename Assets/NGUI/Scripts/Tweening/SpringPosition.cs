@@ -1,7 +1,7 @@
-﻿//----------------------------------------------
+//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2014 Tasharen Entertainment
-//----------------------------------------------
+// Copyright © 2011-2023 Tasharen Entertainment Inc
+//-------------------------------------------------
 
 using UnityEngine;
 
@@ -12,7 +12,7 @@ using UnityEngine;
 [AddComponentMenu("NGUI/Tween/Spring Position")]
 public class SpringPosition : MonoBehaviour
 {
-	public delegate void OnFinished (SpringPosition spring);
+	static public SpringPosition current;
 
 	/// <summary>
 	/// Target position to tween to.
@@ -21,7 +21,7 @@ public class SpringPosition : MonoBehaviour
 	public Vector3 target = Vector3.zero;
 
 	/// <summary>
-	/// How strong is the pull of the spring. Higher value means it gets to the target faster.
+	/// Strength of the spring. The higher the value, the faster the movement.
 	/// </summary>
 
 	public float strength = 10f;
@@ -39,16 +39,12 @@ public class SpringPosition : MonoBehaviour
 	public bool ignoreTimeScale = false;
 
 	/// <summary>
-	/// Game object on which to call the callback function.
+	/// Whether the parent scroll view will be updated as the object moves.
 	/// </summary>
 
-	public GameObject eventReceiver;
+	public bool updateScrollView = false;
 
-	/// <summary>
-	/// Function to call when the spring finishes moving.
-	/// </summary>
-
-	public string callWhenFinished;
+	public delegate void OnFinished ();
 
 	/// <summary>
 	/// Delegate to trigger when the spring finishes.
@@ -56,14 +52,23 @@ public class SpringPosition : MonoBehaviour
 
 	public OnFinished onFinished;
 
+	// Deprecated functionality
+	[SerializeField][HideInInspector] GameObject eventReceiver = null;
+	[SerializeField][HideInInspector] public string callWhenFinished;
+
 	Transform mTrans;
 	float mThreshold = 0f;
+	UIScrollView mSv;
 
 	/// <summary>
 	/// Cache the transform.
 	/// </summary>
 
-	void Start () { mTrans = transform; }
+	void Start ()
+	{
+		mTrans = transform;
+		if (updateScrollView) mSv = NGUITools.FindInParents<UIScrollView>(gameObject);
+	}
 
 	/// <summary>
 	/// Advance toward the target position.
@@ -75,40 +80,66 @@ public class SpringPosition : MonoBehaviour
 
 		if (worldSpace)
 		{
-			if (mThreshold == 0f) mThreshold = (target - mTrans.position).magnitude * 0.001f;
+			if (mThreshold == 0f) mThreshold = Mathf.Min((target - mTrans.position).magnitude * 0.01f, 0.01f);
 			mTrans.position = NGUIMath.SpringLerp(mTrans.position, target, strength, delta);
 
-			if (mThreshold >= (target - mTrans.position).magnitude)
+			if (mThreshold * mThreshold >= (target - mTrans.position).sqrMagnitude)
 			{
 				mTrans.position = target;
-				
-				if (onFinished != null) onFinished(this);
-				
-				if (eventReceiver != null && !string.IsNullOrEmpty(callWhenFinished))
-				{
-					eventReceiver.SendMessage(callWhenFinished, this, SendMessageOptions.DontRequireReceiver);
-				}
+				NotifyListeners();
 				enabled = false;
 			}
 		}
 		else
 		{
-			if (mThreshold == 0f) mThreshold = (target - mTrans.localPosition).magnitude * 0.001f;
+			if (mThreshold == 0f) mThreshold = Mathf.Min((target - mTrans.localPosition).magnitude * 0.01f, 0.01f);
 			mTrans.localPosition = NGUIMath.SpringLerp(mTrans.localPosition, target, strength, delta);
 
-			if (mThreshold >= (target - mTrans.localPosition).magnitude)
+			if (mThreshold * mThreshold >= (target - mTrans.localPosition).sqrMagnitude)
 			{
 				mTrans.localPosition = target;
-				
-				if (onFinished != null) onFinished(this);
-
-				if (eventReceiver != null && !string.IsNullOrEmpty(callWhenFinished))
-				{
-					eventReceiver.SendMessage(callWhenFinished, this, SendMessageOptions.DontRequireReceiver);
-				}
+				NotifyListeners();
 				enabled = false;
 			}
 		}
+
+		// Ensure that the scroll bars remain in sync
+		if (mSv != null) mSv.QueueUpdateScrollbars();
+	}
+
+	/// <summary>
+	/// Immediately finish the animation.
+	/// </summary>
+
+	public void Finish ()
+	{
+		if (enabled)
+		{
+			if (worldSpace) transform.position = target;
+			else transform.localPosition = target;
+
+			NotifyListeners();
+			enabled = false;
+
+			// Ensure that the scroll bars remain in sync
+			if (mSv != null) mSv.QueueUpdateScrollbars();
+		}
+	}
+
+	/// <summary>
+	/// Notify all finished event listeners.
+	/// </summary>
+
+	void NotifyListeners ()
+	{
+		current = this;
+
+		if (onFinished != null) onFinished();
+
+		if (eventReceiver != null && !string.IsNullOrEmpty(callWhenFinished))
+			eventReceiver.SendMessage(callWhenFinished, this, SendMessageOptions.DontRequireReceiver);
+
+		current = null;
 	}
 
 	/// <summary>
@@ -117,17 +148,12 @@ public class SpringPosition : MonoBehaviour
 
 	static public SpringPosition Begin (GameObject go, Vector3 pos, float strength)
 	{
-		SpringPosition sp = go.GetComponent<SpringPosition>();
+		var sp = go.GetComponent<SpringPosition>();
 		if (sp == null) sp = go.AddComponent<SpringPosition>();
 		sp.target = pos;
 		sp.strength = strength;
 		sp.onFinished = null;
-
-		if (!sp.enabled)
-		{
-			sp.mThreshold = 0f;
-			sp.enabled = true;
-		}
+		if (!sp.enabled) sp.enabled = true;
 		return sp;
 	}
 }

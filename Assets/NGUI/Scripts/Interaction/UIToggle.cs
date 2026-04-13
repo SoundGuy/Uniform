@@ -1,7 +1,7 @@
-//----------------------------------------------
+//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2014 Tasharen Entertainment
-//----------------------------------------------
+// Copyright © 2011-2023 Tasharen Entertainment Inc
+//-------------------------------------------------
 
 using UnityEngine;
 using AnimationOrTween;
@@ -34,16 +34,40 @@ public class UIToggle : UIWidgetContainer
 	public int group = 0;
 
 	/// <summary>
-	/// Sprite that's visible when the 'isActive' status is 'true'.
+	/// Sprite that's visible when the 'value' is 'true'.
 	/// </summary>
 
 	public UIWidget activeSprite;
+
+	/// <summary>
+	/// Sprite that's visible when 'value' is 'false'.
+	/// </summary>
+
+	public UIWidget inactiveSprite;
+
+	/// <summary>
+	/// If 'true', when checked the sprite will be hidden when the toggle is checked instead of when it's not.
+	/// </summary>
+
+	public bool invertSpriteState = false;
 
 	/// <summary>
 	/// Animation to play on the active sprite, if any.
 	/// </summary>
 
 	public Animation activeAnimation;
+
+	/// <summary>
+	/// Animation to play on the active sprite, if any.
+	/// </summary>
+
+	public Animator animator;
+
+	/// <summary>
+	/// Tween to use, if any.
+	/// </summary>
+
+	public UITweener tween;
 
 	/// <summary>
 	/// Whether the toggle starts checked.
@@ -69,16 +93,25 @@ public class UIToggle : UIWidgetContainer
 
 	public List<EventDelegate> onChange = new List<EventDelegate>();
 
+	public delegate bool Validate (bool choice);
+
+	/// <summary>
+	/// Want to validate the choice before committing the changes? Set this delegate.
+	/// </summary>
+
+	public Validate validator;
+
 	/// <summary>
 	/// Deprecated functionality. Use the 'group' option instead.
 	/// </summary>
 
-	[HideInInspector][SerializeField] Transform radioButtonRoot;
-	[HideInInspector][SerializeField] bool startsChecked;
-	[HideInInspector][SerializeField] UISprite checkSprite;
+	[HideInInspector][SerializeField] UISprite checkSprite = null;
 	[HideInInspector][SerializeField] Animation checkAnimation;
 	[HideInInspector][SerializeField] GameObject eventReceiver;
 	[HideInInspector][SerializeField] string functionName = "OnActivate";
+	[HideInInspector][SerializeField] bool startsChecked = false; // Use 'startsActive' instead
+
+	[System.NonSerialized] int mIgnoreFrame = 0;
 
 	bool mIsActive = true;
 	bool mStarted = false;
@@ -89,8 +122,30 @@ public class UIToggle : UIWidgetContainer
 
 	public bool value
 	{
-		get { return mIsActive; }
-		set { if (group == 0 || value || optionCanBeNone || !mStarted) Set(value); }
+		get
+		{
+			return mStarted ? mIsActive : startsActive;
+		}
+		set
+		{
+			if (!mStarted) startsActive = value;
+			else if (group == 0 || value || optionCanBeNone || !mStarted) Set(value);
+		}
+	}
+
+	/// <summary>
+	/// Whether the collider is enabled and the widget can be interacted with.
+	/// </summary>
+
+	public bool isColliderEnabled
+	{
+		get
+		{
+			var c = GetComponent<Collider>();
+			if (c != null) return c.enabled;
+			var b = GetComponent<Collider2D>();
+			return (b != null && b.enabled);
+		}
 	}
 
 	[System.Obsolete("Use 'value' instead")]
@@ -104,32 +159,36 @@ public class UIToggle : UIWidgetContainer
 	{
 		for (int i = 0; i < list.size; ++i)
 		{
-			UIToggle toggle = list[i];
+			var toggle = list.buffer[i];
 			if (toggle != null && toggle.group == group && toggle.mIsActive)
 				return toggle;
 		}
 		return null;
 	}
 
-	void OnEnable () { list.Add(this); }
+	void OnEnable () { mIgnoreFrame = Time.frameCount; list.Add(this); }
 	void OnDisable () { list.Remove(this); }
 
 	/// <summary>
 	/// Activate the initial state.
 	/// </summary>
 
-	void Start ()
+	public void Start ()
 	{
+		if (mStarted) return;
+
+		if (startsChecked)
+		{
+			startsChecked = false;
+			startsActive = true;
 #if UNITY_EDITOR
+			NGUITools.SetDirty(this);
+#endif
+		}
+
 		// Auto-upgrade
 		if (!Application.isPlaying)
 		{
-			if (startsChecked)
-			{
-				startsChecked = false;
-				startsActive = true;
-			}
-
 			if (checkSprite != null && activeSprite == null)
 			{
 				activeSprite = checkSprite;
@@ -142,13 +201,10 @@ public class UIToggle : UIWidgetContainer
 				checkAnimation = null;
 			}
 
-			if (Application.isPlaying && activeSprite != null)
-				activeSprite.alpha = startsActive ? 1f : 0f;
-
-			if (radioButtonRoot != null && group == 0)
+			if (Application.isPlaying)
 			{
-				Debug.LogWarning(NGUITools.GetHierarchy(gameObject) +
-					" uses a 'Radio Button Root'. You need to change it to use a 'group' instead.", this);
+				if (activeSprite != null) activeSprite.alpha = invertSpriteState ? (startsActive ? 0f : 1f) : (startsActive ? 1f : 0f);
+				if (inactiveSprite != null) inactiveSprite.alpha = invertSpriteState ? (startsActive ? 1f : 0f) : (startsActive ? 0f : 1f);
 			}
 
 			if (EventDelegate.IsValid(onChange))
@@ -158,11 +214,13 @@ public class UIToggle : UIWidgetContainer
 			}
 		}
 		else
-#endif
 		{
 			mIsActive = !startsActive;
 			mStarted = true;
+			bool instant = instantTween;
+			instantTween = true;
 			Set(startsActive);
+			instantTween = instant;
 		}
 	}
 
@@ -170,19 +228,36 @@ public class UIToggle : UIWidgetContainer
 	/// Check or uncheck on click.
 	/// </summary>
 
-	void OnClick () { if (enabled) value = !value; }
+	[DoNotObfuscateNGUI]
+	public void OnClick ()
+	{
+		if (mIgnoreFrame == Time.frameCount) return;
+
+		if (enabled && isColliderEnabled && UICamera.currentTouchID != -2)
+		{
+			mIgnoreFrame = Time.frameCount;
+			value = !value;
+		}
+	}
+
+	[DoNotObfuscateNGUI] public void SetToTrue () { if (!value) value = true; }
+	[DoNotObfuscateNGUI] public void SetToFalse () { if (value) value = false; }
 
 	/// <summary>
 	/// Fade out or fade in the active sprite and notify the OnChange event listener.
+	/// If setting the initial value, call Start() first.
 	/// </summary>
 
-	void Set (bool state)
+	public void Set (bool state, bool notify = true)
 	{
+		if (validator != null && !validator(state)) return;
+
 		if (!mStarted)
 		{
 			mIsActive = state;
 			startsActive = state;
-			if (activeSprite != null) activeSprite.alpha = state ? 1f : 0f;
+			if (activeSprite != null) activeSprite.alpha = invertSpriteState ? (state ? 0f : 1f) : (state ? 1f : 0f);
+			if (inactiveSprite != null) inactiveSprite.alpha = invertSpriteState ? (state ? 1f : 0f) : (state ? 0f : 1f);
 		}
 		else if (mIsActive != state)
 		{
@@ -191,9 +266,9 @@ public class UIToggle : UIWidgetContainer
 			{
 				for (int i = 0, imax = list.size; i < imax; )
 				{
-					UIToggle cb = list[i];
+					var cb = list.buffer[i];
 					if (cb != this && cb.group == group) cb.Set(false);
-					
+
 					if (list.size != imax)
 					{
 						imax = list.size;
@@ -209,33 +284,87 @@ public class UIToggle : UIWidgetContainer
 			// Tween the color of the active sprite
 			if (activeSprite != null)
 			{
-				if (instantTween)
+				if (instantTween || !NGUITools.GetActive(this))
 				{
-					activeSprite.alpha = mIsActive ? 1f : 0f;
+					activeSprite.alpha = invertSpriteState ? (mIsActive ? 0f : 1f) : (mIsActive ? 1f : 0f);
 				}
 				else
 				{
-					TweenAlpha.Begin(activeSprite.gameObject, 0.15f, mIsActive ? 1f : 0f);
+					TweenAlpha.Begin(activeSprite.gameObject, 0.15f, invertSpriteState ? (mIsActive ? 0f : 1f) : (mIsActive ? 1f : 0f));
 				}
 			}
 
-			current = this;
+			// Tween the color of the inactive sprite
+			if (inactiveSprite != null)
+			{
+				if (instantTween || !NGUITools.GetActive(this))
+				{
+					inactiveSprite.alpha = invertSpriteState ? (mIsActive ? 1f : 0f) : (mIsActive ? 0f : 1f);
+				}
+				else
+				{
+					TweenAlpha.Begin(inactiveSprite.gameObject, 0.15f, invertSpriteState ? (mIsActive ? 1f : 0f) : (mIsActive ? 0f : 1f));
+				}
+			}
 
-			if (EventDelegate.IsValid(onChange))
+			if (notify && current == null)
 			{
-				EventDelegate.Execute(onChange);
+				var tog = current;
+				current = this;
+
+				if (EventDelegate.IsValid(onChange))
+				{
+					EventDelegate.Execute(onChange);
+				}
+				else if (eventReceiver != null && !string.IsNullOrEmpty(functionName))
+				{
+					// Legacy functionality support (for backwards compatibility)
+					eventReceiver.SendMessage(functionName, mIsActive, SendMessageOptions.DontRequireReceiver);
+				}
+				current = tog;
 			}
-			else if (eventReceiver != null && !string.IsNullOrEmpty(functionName))
-			{
-				// Legacy functionality support (for backwards compatibility)
-				eventReceiver.SendMessage(functionName, mIsActive, SendMessageOptions.DontRequireReceiver);
-			}
-			current = null;
 
 			// Play the checkmark animation
+			if (animator != null)
+			{
+				var aa = ActiveAnimation.Play(animator, null,
+					state ? Direction.Forward : Direction.Reverse,
+					EnableCondition.IgnoreDisabledState,
+					DisableCondition.DoNotDisable);
+				if (aa != null && (instantTween || !NGUITools.GetActive(this))) aa.Finish();
+			}
+
 			if (activeAnimation != null)
 			{
-				ActiveAnimation.Play(activeAnimation, state ? Direction.Forward : Direction.Reverse);
+				var aa = ActiveAnimation.Play(activeAnimation, null,
+					state ? Direction.Forward : Direction.Reverse,
+					EnableCondition.IgnoreDisabledState,
+					DisableCondition.DoNotDisable);
+				if (aa != null && (instantTween || !NGUITools.GetActive(this))) aa.Finish();
+			}
+
+			if (tween != null)
+			{
+				var isActive = NGUITools.GetActive(this);
+
+				tween.Play(state);
+				if (instantTween || !isActive) tween.tweenFactor = state ? 1f : 0f;
+
+				if (tween.tweenGroup != 0)
+				{
+					var tws = gameObject.GetComponentsInChildren<UITweener>(true);
+
+					for (int i = 0, imax = tws.Length; i < imax; ++i)
+					{
+						var t = tws[i];
+
+						if (t != tween && t.tweenGroup == tween.tweenGroup)
+						{
+							t.Play(state);
+							if (instantTween || !isActive) t.tweenFactor = state ? 1f : 0f;
+						}
+					}
+				}
 			}
 		}
 	}

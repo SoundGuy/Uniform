@@ -1,7 +1,7 @@
-﻿//----------------------------------------------
+//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2014 Tasharen Entertainment
-//----------------------------------------------
+// Copyright © 2011-2023 Tasharen Entertainment Inc
+//-------------------------------------------------
 
 using UnityEngine;
 
@@ -11,7 +11,7 @@ using UnityEngine;
 /// UIEventListener.Get(gameObject).onClick += MyClickFunction;
 /// </summary>
 
-[AddComponentMenu("NGUI/Interaction/Forward Events")]
+[AddComponentMenu("NGUI/Interaction/Forward Events (Legacy)")]
 public class UIForwardEvents : MonoBehaviour
 {
 	public GameObject target;
@@ -22,9 +22,9 @@ public class UIForwardEvents : MonoBehaviour
 	public bool onSelect		= false;
 	public bool onDrag			= false;
 	public bool onDrop			= false;
-	public bool onInput			= false;
 	public bool onSubmit		= false;
 	public bool onScroll		= false;
+	public bool onTooltip		= false;
 
 	void OnHover (bool isOver)
 	{
@@ -82,14 +82,6 @@ public class UIForwardEvents : MonoBehaviour
 		}
 	}
 
-	void OnInput (string text)
-	{
-		if (onInput && target != null)
-		{
-			target.SendMessage("OnInput", text, SendMessageOptions.DontRequireReceiver);
-		}
-	}
-
 	void OnSubmit ()
 	{
 		if (onSubmit && target != null)
@@ -103,6 +95,14 @@ public class UIForwardEvents : MonoBehaviour
 		if (onScroll && target != null)
 		{
 			target.SendMessage("OnScroll", delta, SendMessageOptions.DontRequireReceiver);
+		}
+	}
+
+	void OnTooltip (bool show)
+	{
+		if (onTooltip && target != null)
+		{
+			target.SendMessage("OnTooltip", show, SendMessageOptions.DontRequireReceiver);
 		}
 	}
 }

@@ -1,7 +1,7 @@
-//----------------------------------------------
+//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2014 Tasharen Entertainment
-//----------------------------------------------
+// Copyright © 2011-2023 Tasharen Entertainment Inc
+//-------------------------------------------------
 
 using UnityEngine;
 
@@ -14,6 +14,9 @@ public class TweenPosition : UITweener
 {
 	public Vector3 from;
 	public Vector3 to;
+
+	[HideInInspector]
+	public bool worldSpace = false;
 
 	Transform mTrans;
 	UIRect mRect;
@@ -31,13 +34,14 @@ public class TweenPosition : UITweener
 	{
 		get
 		{
-			return cachedTransform.localPosition;
+			return worldSpace ? cachedTransform.position : cachedTransform.localPosition;
 		}
 		set
 		{
-			if (mRect == null || !mRect.isAnchored)
+			if (mRect == null || !mRect.isAnchored || worldSpace)
 			{
-				cachedTransform.localPosition = value;
+				if (worldSpace) cachedTransform.position = value;
+				else cachedTransform.localPosition = value;
 			}
 			else
 			{
@@ -62,6 +66,25 @@ public class TweenPosition : UITweener
 	static public TweenPosition Begin (GameObject go, float duration, Vector3 pos)
 	{
 		TweenPosition comp = UITweener.Begin<TweenPosition>(go, duration);
+		comp.from = comp.value;
+		comp.to = pos;
+
+		if (duration <= 0f)
+		{
+			comp.Sample(1f, true);
+			comp.enabled = false;
+		}
+		return comp;
+	}
+
+	/// <summary>
+	/// Start the tweening operation.
+	/// </summary>
+
+	static public TweenPosition Begin (GameObject go, float duration, Vector3 pos, bool worldSpace)
+	{
+		TweenPosition comp = UITweener.Begin<TweenPosition>(go, duration);
+		comp.worldSpace = worldSpace;
 		comp.from = comp.value;
 		comp.to = pos;
 

@@ -1,7 +1,7 @@
-//----------------------------------------------
+//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2014 Tasharen Entertainment
-//----------------------------------------------
+// Copyright © 2011-2023 Tasharen Entertainment Inc
+//-------------------------------------------------
 
 #if !UNITY_3_5 && !UNITY_FLASH
 #define DYNAMIC_FONT
@@ -17,7 +17,7 @@ using System.Collections.Generic;
 
 public class UICreateWidgetWizard : EditorWindow
 {
-	public enum WidgetType
+	[DoNotObfuscateNGUI] public enum WidgetType
 	{
 		Label,
 		Sprite,
@@ -145,8 +145,14 @@ public class UICreateWidgetWizard : EditorWindow
 
 	void OnSelectAtlas (Object obj)
 	{
-		NGUISettings.atlas = obj as UIAtlas;
-		Repaint();
+		// Legacy atlas support
+		if (obj != null && obj is GameObject) obj = (obj as GameObject).GetComponent<UIAtlas>();
+
+		if (NGUISettings.atlas != obj as INGUIAtlas)
+		{
+			NGUISettings.atlas = obj as INGUIAtlas;
+			Repaint();
+		}
 	}
 
 	/// <summary>
@@ -155,8 +161,14 @@ public class UICreateWidgetWizard : EditorWindow
 
 	void OnSelectFont (Object obj)
 	{
-		NGUISettings.ambigiousFont = obj as UIFont;
-		Repaint();
+		// Legacy font support
+		if (obj != null && obj is GameObject) obj = (obj as GameObject).GetComponent<UIFont>();
+
+		if (NGUISettings.ambigiousFont != obj)
+		{
+			NGUISettings.ambigiousFont = obj;
+			Repaint();
+		}
 	}
 
 	/// <summary>
@@ -233,7 +245,14 @@ public class UICreateWidgetWizard : EditorWindow
 		}
 	}
 
-	void OnSprite (string val) { NGUISettings.selectedSprite = val; Repaint(); }
+	void OnSprite (string val)
+	{
+		if (NGUISettings.selectedSprite != val)
+		{
+			NGUISettings.selectedSprite = val;
+			Repaint();
+		}
+	}
 
 	/// <summary>
 	/// UI Texture doesn't do anything other than creating the widget.
@@ -315,7 +334,7 @@ public class UICreateWidgetWizard : EditorWindow
 			go = NGUITools.AddChild(go);
 			go.name = "Image Button";
 
-			UISpriteData sp = NGUISettings.atlas.GetSprite(mImage0);
+			UISpriteData sp = NGUISettings.GetSprite(mImage0);
 			UISprite sprite = NGUITools.AddWidget<UISprite>(go);
 			sprite.type = sp.hasBorder ? UISprite.Type.Sliced : UISprite.Type.Simple;
 			sprite.name = "Background";
@@ -509,8 +528,8 @@ public class UICreateWidgetWizard : EditorWindow
 			go.name = slider ? "Slider" : "Progress Bar";
 
 			// Background sprite
-			UISpriteData bgs = NGUISettings.atlas.GetSprite(mSliderBG);
-			UISprite back = (UISprite)NGUITools.AddWidget<UISprite>(go);
+			var bgs = NGUISettings.GetSprite(mSliderBG);
+			var back = NGUITools.AddWidget<UISprite>(go);
 
 			back.type = bgs.hasBorder ? UISprite.Type.Sliced : UISprite.Type.Simple;
 			back.name = "Background";
@@ -524,7 +543,7 @@ public class UICreateWidgetWizard : EditorWindow
 			back.MakePixelPerfect();
 
 			// Foreground sprite
-			UISpriteData fgs = NGUISettings.atlas.GetSprite(mSliderFG);
+			UISpriteData fgs = NGUISettings.GetSprite(mSliderFG);
 			UISprite front = NGUITools.AddWidget<UISprite>(go);
 			front.type = fgs.hasBorder ? UISprite.Type.Sliced : UISprite.Type.Simple;
 			front.name = "Foreground";
@@ -546,7 +565,7 @@ public class UICreateWidgetWizard : EditorWindow
 			// Thumb sprite
 			if (slider)
 			{
-				UISpriteData tbs = NGUISettings.atlas.GetSprite(mSliderTB);
+				UISpriteData tbs = NGUISettings.GetSprite(mSliderTB);
 				UISprite thb = NGUITools.AddWidget<UISprite>(go);
 
 				thb.type = tbs.hasBorder ? UISprite.Type.Sliced : UISprite.Type.Simple;
@@ -648,14 +667,14 @@ public class UICreateWidgetWizard : EditorWindow
 			go = NGUITools.AddChild(go);
 			go.name = isDropDown ? "Popup List" : "Popup Menu";
 
-			UISpriteData sphl = NGUISettings.atlas.GetSprite(mListHL);
-			UISpriteData spfg = NGUISettings.atlas.GetSprite(mListFG);
+			UISpriteData sphl = NGUISettings.GetSprite(mListHL);
+			UISpriteData spfg = NGUISettings.GetSprite(mListFG);
 
 			Vector2 hlPadding = new Vector2(Mathf.Max(4f, sphl.paddingLeft), Mathf.Max(4f, sphl.paddingTop));
 			Vector2 fgPadding = new Vector2(Mathf.Max(4f, spfg.paddingLeft), Mathf.Max(4f, spfg.paddingTop));
 
 			// Background sprite
-			UISprite sprite = NGUITools.AddSprite(go, NGUISettings.atlas, mListFG);
+			UISprite sprite = NGUITools.AddSprite(go, NGUISettings.atlas as INGUIAtlas, mListFG);
 			sprite.depth = depth;
 			sprite.atlas = NGUISettings.atlas;
 			sprite.pivot = UIWidget.Pivot.Left;
@@ -679,7 +698,7 @@ public class UICreateWidgetWizard : EditorWindow
 
 			// Add the popup list
 			UIPopupList list = go.AddComponent<UIPopupList>();
-			list.atlas = NGUISettings.atlas;
+			list.atlas = NGUISettings.atlas as Object;
 			list.ambigiousFont = NGUISettings.ambigiousFont;
 			list.fontSize = NGUISettings.fontSize;
 			list.fontStyle = NGUISettings.fontStyle;
@@ -708,9 +727,9 @@ public class UICreateWidgetWizard : EditorWindow
 	void OnSelectionChange () { Repaint(); }
 
 #if DYNAMIC_FONT
-	UILabelInspector.FontType mType = UILabelInspector.FontType.Dynamic;
+	UILabelInspector.FontType mType = UILabelInspector.FontType.Unity;
 #else
-	UILabelInspector.FontType mType = UILabelInspector.FontType.Bitmap;
+	UILabelInspector.FontType mType = UILabelInspector.FontType.Unity;
 #endif
 
 	void OnFont (Object obj) { NGUISettings.ambigiousFont = obj; }
@@ -728,9 +747,9 @@ public class UICreateWidgetWizard : EditorWindow
 			Load();
 #if DYNAMIC_FONT
 			Object font = NGUISettings.ambigiousFont;
-			mType = ((font != null) && (font is UIFont)) ? UILabelInspector.FontType.Bitmap : UILabelInspector.FontType.Dynamic;
+			mType = ((font != null) && (font is UIFont)) ? UILabelInspector.FontType.NGUI : UILabelInspector.FontType.Unity;
 #else
-			mType = UILabelInspector.FontType.Bitmap;
+			mType = UILabelInspector.FontType.NGUI;
 #endif
 		}
 
@@ -740,7 +759,7 @@ public class UICreateWidgetWizard : EditorWindow
 		if (go == null)
 		{
 			GUILayout.Label("You must create a UI first.");
-			
+
 			if (GUILayout.Button("Open the New UI Wizard"))
 			{
 				EditorWindow.GetWindow<UICreateNewUIWizard>(false, "New UI", true);
@@ -751,7 +770,7 @@ public class UICreateWidgetWizard : EditorWindow
 			GUILayout.Space(4f);
 
 			GUILayout.BeginHorizontal();
-			ComponentSelector.Draw<UIAtlas>(NGUISettings.atlas, OnSelectAtlas, false, GUILayout.Width(140f));
+			ComponentSelector.Draw(NGUISettings.atlas, OnSelectAtlas, false, GUILayout.Width(140f));
 			GUILayout.Label("Texture atlas used by widgets", GUILayout.Width(10000f));
 			GUILayout.EndHorizontal();
 
@@ -759,20 +778,20 @@ public class UICreateWidgetWizard : EditorWindow
 
 			if (NGUIEditorTools.DrawPrefixButton("Font"))
 			{
-				if (mType == UILabelInspector.FontType.Bitmap)
+				if (mType == UILabelInspector.FontType.NGUI)
 				{
 					ComponentSelector.Show<UIFont>(OnFont);
 				}
 				else
 				{
-					ComponentSelector.Show<Font>(OnFont);
+					ComponentSelector.Show<Font>(OnFont, new string[] { ".ttf", ".otf" });
 				}
 			}
 
 #if DYNAMIC_FONT
 			GUI.changed = false;
 
-			if (mType == UILabelInspector.FontType.Dynamic)
+			if (mType == UILabelInspector.FontType.Unity)
 			{
 				NGUISettings.ambigiousFont = EditorGUILayout.ObjectField(NGUISettings.ambigiousFont, typeof(Font), false, GUILayout.Width(140f));
 			}
@@ -785,7 +804,7 @@ public class UICreateWidgetWizard : EditorWindow
 			NGUISettings.ambigiousFont = EditorGUILayout.ObjectField(NGUISettings.ambigiousFont, typeof(UIFont), false, GUILayout.Width(140f));
 #endif
 			GUILayout.Label("size", GUILayout.Width(30f));
-			EditorGUI.BeginDisabledGroup(mType == UILabelInspector.FontType.Bitmap);
+			EditorGUI.BeginDisabledGroup(mType == UILabelInspector.FontType.NGUI);
 			NGUISettings.fontSize = EditorGUILayout.IntField(NGUISettings.fontSize, GUILayout.Width(30f));
 			EditorGUI.EndDisabledGroup();
 			GUILayout.Label("font used by the labels");

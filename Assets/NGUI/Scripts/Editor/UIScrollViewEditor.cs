@@ -1,7 +1,7 @@
-//----------------------------------------------
+//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2014 Tasharen Entertainment
-//----------------------------------------------
+// Copyright © 2011-2023 Tasharen Entertainment Inc
+//-------------------------------------------------
 
 using UnityEngine;
 using UnityEditor;
@@ -15,6 +15,11 @@ public class UIScrollViewEditor : Editor
 
 		GUILayout.Space(3f);
 		serializedObject.Update();
+
+		SerializedProperty sppv = serializedObject.FindProperty("contentPivot");
+		UIWidget.Pivot before = (UIWidget.Pivot)sppv.intValue;
+
+		NGUIEditorTools.DrawProperty("Content Origin", sppv, false);
 
 		SerializedProperty sp = NGUIEditorTools.DrawProperty("Movement", serializedObject, "movement");
 
@@ -34,17 +39,11 @@ public class UIScrollViewEditor : Editor
 		NGUIEditorTools.DrawProperty("Drag Effect", serializedObject, "dragEffect");
 		NGUIEditorTools.DrawProperty("Scroll Wheel Factor", serializedObject, "scrollWheelFactor");
 		NGUIEditorTools.DrawProperty("Momentum Amount", serializedObject, "momentumAmount");
-
-		NGUIEditorTools.SetLabelWidth(20f);
-		GUILayout.BeginHorizontal();
-		GUILayout.Label("Reset Position", GUILayout.Width(106f));
-		NGUIEditorTools.DrawProperty("X", serializedObject, "relativePositionOnReset.x", GUILayout.MinWidth(20f));
-		NGUIEditorTools.DrawProperty("Y", serializedObject, "relativePositionOnReset.y", GUILayout.MinWidth(20f));
-		GUILayout.EndHorizontal();
-
-		NGUIEditorTools.SetLabelWidth(130f);
+		NGUIEditorTools.DrawProperty("Spring Strength", serializedObject, "springStrength");
+		NGUIEditorTools.DrawProperty("Dampen Strength", serializedObject, "dampenStrength");
 
 		NGUIEditorTools.DrawProperty("Restrict Within Panel", serializedObject, "restrictWithinPanel");
+		NGUIEditorTools.DrawProperty("Constrain On Drag", serializedObject, "constrainOnDrag");
 		NGUIEditorTools.DrawProperty("Cancel Drag If Fits", serializedObject, "disableDragIfFits");
 		NGUIEditorTools.DrawProperty("Smooth Drag Start", serializedObject, "smoothDragStart");
 		NGUIEditorTools.DrawProperty("IOS Drag Emulation", serializedObject, "iOSDragEmulation");
@@ -60,5 +59,10 @@ public class UIScrollViewEditor : Editor
 			NGUIEditorTools.EndContents();
 		}
 		serializedObject.ApplyModifiedProperties();
+
+		if (before != (UIWidget.Pivot)sppv.intValue)
+		{
+			(target as UIScrollView).ResetPosition();
+		}
 	}
 }

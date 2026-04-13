@@ -43,7 +43,7 @@ public class RandomMove : MonoBehaviour {
 		foreach (ContactPoint2D c in collision.contacts) {
 			if (c.collider.gameObject.name == "CageWall") {
 				//Debug.Log("HitWall!!");
-			 	GetComponent<Rigidbody2D>().velocity = (bounceSpeed * c.normal );
+			 	GetComponent<Rigidbody2D>().linearVelocity = (bounceSpeed * c.normal );
 				ChooseRandomDirection();
 			}
 		}
@@ -76,9 +76,9 @@ public class RandomMove : MonoBehaviour {
 		}*/
 
 		//if (rigidbody2D.velocity.sqrMagnitude > 2f) 
-			GetComponent<Rigidbody2D>().velocity = moveSpeed * GetComponent<Rigidbody2D>().velocity.normalized;
+			GetComponent<Rigidbody2D>().linearVelocity = moveSpeed * GetComponent<Rigidbody2D>().linearVelocity.normalized;
 
-		velo = GetComponent<Rigidbody2D>().velocity.sqrMagnitude;
+		velo = GetComponent<Rigidbody2D>().linearVelocity.sqrMagnitude;
 
 
 

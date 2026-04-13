@@ -1,7 +1,7 @@
-//----------------------------------------------
+//-------------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2014 Tasharen Entertainment
-//----------------------------------------------
+// Copyright © 2011-2023 Tasharen Entertainment Inc
+//-------------------------------------------------
 
 using UnityEngine;
 
@@ -12,16 +12,17 @@ using UnityEngine;
 [AddComponentMenu("NGUI/Interaction/Saved Option")]
 public class UISavedOption : MonoBehaviour
 {
-	/// <summary>
-	/// PlayerPrefs-stored key for this option.
-	/// </summary>
-
+	[Tooltip("PlayerPrefs-stored key for this option.")]
 	public string keyName;
+
+	[Tooltip("By default, NGUITools functions are used for get/set operations. If you want to use PlayerPrefs instead, turn this on.")]
+	public bool usePlayerPrefs = false;
 
 	string key { get { return (string.IsNullOrEmpty(keyName)) ? "NGUI State: " + name : keyName; } }
 
 	UIPopupList mList;
 	UIToggle mCheck;
+	UIProgressBar mSlider;
 
 	/// <summary>
 	/// Cache the components and register a listener callback.
@@ -30,7 +31,8 @@ public class UISavedOption : MonoBehaviour
 	void Awake ()
 	{
 		mList = GetComponent<UIPopupList>();
-		mCheck = GetComponent<UIToggle>();	
+		mCheck = GetComponent<UIToggle>();
+		mSlider = GetComponent<UIProgressBar>();
 	}
 
 	/// <summary>
@@ -39,24 +41,26 @@ public class UISavedOption : MonoBehaviour
 
 	void OnEnable ()
 	{
-		if (mList != null) EventDelegate.Add(mList.onChange, SaveSelection);
-		if (mCheck != null) EventDelegate.Add(mCheck.onChange, SaveState);
-
 		if (mList != null)
 		{
-			string s = PlayerPrefs.GetString(key);
+			EventDelegate.Add(mList.onChange, SaveSelection);
+			var s = usePlayerPrefs ? PlayerPrefs.GetString(key) : NGUITools.GetString(key);
 			if (!string.IsNullOrEmpty(s)) mList.value = s;
-			return;
 		}
-
-		if (mCheck != null)
+		else if (mCheck != null)
 		{
-			mCheck.value = (PlayerPrefs.GetInt(key, 1) != 0);
+			EventDelegate.Add(mCheck.onChange, SaveState);
+			mCheck.value = (usePlayerPrefs ? (PlayerPrefs.GetInt(key, mCheck.startsActive ? 1 : -1) == 1) : (NGUITools.GetInt(key, mCheck.startsActive ? 1 : -1) == 1));
+		}
+		else if (mSlider != null)
+		{
+			EventDelegate.Add(mSlider.onChange, SaveProgress);
+			mSlider.value = usePlayerPrefs ? PlayerPrefs.GetFloat(key, mSlider.value) : NGUITools.GetFloat(key, mSlider.value);
 		}
 		else
 		{
-			string s = PlayerPrefs.GetString(key);
-			UIToggle[] toggles = GetComponentsInChildren<UIToggle>(true);
+			var s = usePlayerPrefs ? PlayerPrefs.GetString(key) : NGUITools.GetString(key);
+			var toggles = GetComponentsInChildren<UIToggle>(true);
 
 			for (int i = 0, imax = toggles.Length; i < imax; ++i)
 			{
@@ -73,19 +77,20 @@ public class UISavedOption : MonoBehaviour
 	void OnDisable ()
 	{
 		if (mCheck != null) EventDelegate.Remove(mCheck.onChange, SaveState);
-		if (mList != null) EventDelegate.Remove(mList.onChange, SaveSelection);
-
-		if (mCheck == null && mList == null)
+		else if (mList != null) EventDelegate.Remove(mList.onChange, SaveSelection);
+		else if (mSlider != null) EventDelegate.Remove(mSlider.onChange, SaveProgress);
+		else
 		{
-			UIToggle[] toggles = GetComponentsInChildren<UIToggle>(true);
+			var toggles = GetComponentsInChildren<UIToggle>(true);
 
 			for (int i = 0, imax = toggles.Length; i < imax; ++i)
 			{
-				UIToggle ch = toggles[i];
+				var ch = toggles[i];
 
 				if (ch.value)
 				{
-					PlayerPrefs.SetString(key, ch.name);
+					if (usePlayerPrefs) PlayerPrefs.SetString(key, ch.name);
+					else NGUITools.SetString(key, ch.name);
 					break;
 				}
 			}
@@ -96,11 +101,17 @@ public class UISavedOption : MonoBehaviour
 	/// Save the selection.
 	/// </summary>
 
-	void SaveSelection () { PlayerPrefs.SetString(key, UIPopupList.current.value); }
+	public void SaveSelection () { if (usePlayerPrefs) PlayerPrefs.SetString(key, UIPopupList.current.value); else NGUITools.SetString(key, UIPopupList.current.value); }
 
 	/// <summary>
 	/// Save the state.
 	/// </summary>
 
-	void SaveState () { PlayerPrefs.SetInt(key, UIToggle.current.value ? 1 : 0); }
+	public void SaveState () { if (usePlayerPrefs) PlayerPrefs.SetInt(key, UIToggle.current.value ? 1 : -1); else NGUITools.SetInt(key, UIToggle.current.value ? 1 : -1); }
+
+	/// <summary>
+	/// Save the current progress.
+	/// </summary>
+
+	public void SaveProgress () { if (usePlayerPrefs) PlayerPrefs.SetFloat(key, UIProgressBar.current.value); else NGUITools.SetFloat(key, UIProgressBar.current.value); }
 }
