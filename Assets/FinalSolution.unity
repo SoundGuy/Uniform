@@ -299,7 +299,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: db6c785f81f6eeb46ba1dfa3f4e9bd73, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -760,7 +760,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: db6c785f81f6eeb46ba1dfa3f4e9bd73, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1025,7 +1025,7 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 0.39607844, g: 0.36862746, b: 0.29411766, a: 0}
   mPivot: 4
-  mWidth: 1855
+  mWidth: 2962
   mHeight: 100
   mDepth: 0
   boundless: 0
@@ -1033,7 +1033,7 @@ MonoBehaviour:
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 24.6
+  aspectRatio: 29.62
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: d1500b8585a18e54b933518938586369, type: 3}
   mFont: {fileID: 0}
@@ -1184,7 +1184,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: a8703907e2ba4a74e927430b7399b62b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
