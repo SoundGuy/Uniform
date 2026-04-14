@@ -14,6 +14,35 @@
         border: 0;
         margin: 0;
       }
+      #unity-root {
+        display: block;
+        text-align: center;
+        padding-top: 8px;
+      }
+      #unity-stage {
+        position: relative;
+        display: inline-block;
+        margin: 0 auto;
+      }
+      #unity-canvas {
+        display: block;
+        background: #1F1F20;
+      }
+      #mobile-controls {
+        display: none;
+        margin-top: 8px;
+      }
+      #rotate-button {
+        appearance: none;
+        border: 1px solid #555;
+        border-radius: 4px;
+        background: #eee;
+        color: #111;
+        font-size: 12px;
+        line-height: 1;
+        padding: 7px 10px;
+        cursor: pointer;
+      }
       a:link, a:visited {
         color: #000;
       }
@@ -22,6 +51,13 @@
       }
       .game-footer {
         font-size: x-small;
+        padding-bottom: 12px;
+      }
+      body.mobile #unity-root {
+        padding-top: 8px;
+      }
+      body.mobile #mobile-controls {
+        display: block;
       }
     </style>
 #if SHOW_DIAGNOSTICS
@@ -30,7 +66,14 @@
 #endif
   </head>
   <body>
-    <canvas id="unity-canvas" width={{{ WIDTH }}} height={{{ HEIGHT }}} tabindex="-1" style="width: {{{ WIDTH }}}px; height: {{{ HEIGHT }}}px; background: #1F1F20"></canvas>
+    <div id="unity-root">
+      <div id="unity-stage">
+        <canvas id="unity-canvas" width={{{ WIDTH }}} height={{{ HEIGHT }}} tabindex="-1" style="width: {{{ WIDTH }}}px; height: {{{ HEIGHT }}}px;"></canvas>
+      </div>
+    </div>
+    <div id="mobile-controls">
+      <button id="rotate-button" type="button" aria-label="Toggle rotated view">Rotate</button>
+    </div>
 #if SHOW_DIAGNOSTICS
     <div id="unity-footer">
         <img id="diagnostics-icon" src="TemplateData/webmemd-icon.png">
@@ -38,31 +81,151 @@
 #endif
     <script src="Build/{{{ LOADER_FILENAME }}}"></script>
     <script>
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        // Mobile device style: fill the whole browser client area with the game canvas:
+      const canvas = document.querySelector("#unity-canvas");
+      const stage = document.querySelector("#unity-stage");
+      const rotateButton = document.getElementById("rotate-button");
+      const mobileControls = document.getElementById("mobile-controls");
+      const baseWidth = {{{ WIDTH }}};
+      const baseHeight = {{{ HEIGHT }}};
+      const aspectRatio = baseWidth / baseHeight;
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      let rotatedFallback = false;
+      let nativeLandscapeLocked = false;
+
+      if (isMobile) {
         var meta = document.createElement('meta');
         meta.name = 'viewport';
         meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
         document.getElementsByTagName('head')[0].appendChild(meta);
-
-        var canvas = document.querySelector("#unity-canvas");
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
-        canvas.style.position = "fixed";
-
-        document.body.style.textAlign = "left";
-
-#if SHOW_DIAGNOSTICS
-        // position the diagnostics icon in the corner on the canvas
-        let diagnostics_icon = document.getElementById("diagnostics-icon");
-        diagnostics_icon.style.position = "fixed";
-        diagnostics_icon.style.bottom = "10px";
-        diagnostics_icon.style.right = "0px";
-        canvas.after(diagnostics_icon);
-#endif
+        document.body.classList.add("mobile");
+        mobileControls.style.display = "block";
       }
 
-      createUnityInstance(document.querySelector("#unity-canvas"), {
+      function setPortraitLayout() {
+        rotatedFallback = false;
+        stage.style.transform = "";
+        stage.style.transformOrigin = "";
+        stage.style.margin = "0 auto";
+        rotateButton.textContent = "Rotate";
+      }
+
+      function setRotatedFallbackLayout() {
+        rotatedFallback = true;
+        stage.style.transform = "rotate(90deg)";
+        stage.style.transformOrigin = "center center";
+        stage.style.margin = "0";
+        rotateButton.textContent = "Portrait";
+      }
+
+      function layoutCanvas() {
+        if (!isMobile) {
+          canvas.style.width = baseWidth + "px";
+          canvas.style.height = baseHeight + "px";
+          return;
+        }
+
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+        let targetWidth;
+        let targetHeight;
+
+        if (!rotatedFallback) {
+          targetWidth = viewportWidth;
+          targetHeight = targetWidth / aspectRatio;
+          if (targetHeight > viewportHeight) {
+            targetHeight = viewportHeight;
+            targetWidth = targetHeight * aspectRatio;
+          }
+
+          stage.style.width = targetWidth + "px";
+          stage.style.height = targetHeight + "px";
+          canvas.style.width = targetWidth + "px";
+          canvas.style.height = targetHeight + "px";
+          return;
+        }
+
+        targetWidth = viewportHeight;
+        targetHeight = targetWidth / aspectRatio;
+        if (targetHeight > viewportWidth) {
+          targetHeight = viewportWidth;
+          targetWidth = targetHeight * aspectRatio;
+        }
+
+        stage.style.width = targetWidth + "px";
+        stage.style.height = targetHeight + "px";
+        canvas.style.width = targetWidth + "px";
+        canvas.style.height = targetHeight + "px";
+
+        // Rotated element uses unrotated box space; offset to keep centered.
+        const offsetX = (targetHeight - targetWidth) / 2;
+        const offsetY = (targetWidth - targetHeight) / 2;
+        stage.style.transform = "translate(" + offsetX + "px, " + offsetY + "px) rotate(90deg)";
+      }
+
+      async function tryNativeLandscapeLock() {
+        if (!document.fullscreenElement && canvas.requestFullscreen) {
+          try {
+            await canvas.requestFullscreen();
+          } catch (err) {
+            return false;
+          }
+        }
+
+        if (screen.orientation && screen.orientation.lock) {
+          try {
+            await screen.orientation.lock("landscape");
+            return true;
+          } catch (err) {
+            return false;
+          }
+        }
+
+        return false;
+      }
+
+      async function rotateToggle() {
+        if (!isMobile) {
+          return;
+        }
+
+        if (nativeLandscapeLocked) {
+          nativeLandscapeLocked = false;
+          rotateButton.textContent = "Rotate";
+          if (screen.orientation && screen.orientation.unlock) {
+            try {
+              screen.orientation.unlock();
+            } catch (err) {
+              // Ignore unlock failures on unsupported browsers.
+            }
+          }
+        } else if (!rotatedFallback) {
+          const locked = await tryNativeLandscapeLock();
+          if (!locked) {
+            setRotatedFallbackLayout();
+          } else {
+            nativeLandscapeLocked = true;
+            rotateButton.textContent = "Portrait";
+          }
+        } else {
+          setPortraitLayout();
+          if (screen.orientation && screen.orientation.unlock) {
+            try {
+              screen.orientation.unlock();
+            } catch (err) {
+              // Ignore unlock failures on unsupported browsers.
+            }
+          }
+        }
+
+        layoutCanvas();
+      }
+
+      rotateButton.addEventListener("click", rotateToggle);
+      window.addEventListener("resize", layoutCanvas);
+      window.addEventListener("orientationchange", layoutCanvas);
+      layoutCanvas();
+
+      createUnityInstance(canvas, {
         arguments: [],
         dataUrl: "Build/{{{ DATA_FILENAME }}}",
         frameworkUrl: "Build/{{{ FRAMEWORK_FILENAME }}}",
@@ -87,6 +250,7 @@
             unityDiagnostics.openDiagnosticsDiv(unityInstance.GetMetricsInfo);
         };
 #endif
+        layoutCanvas();
       }).catch((message) => {
         alert(message);
       });
