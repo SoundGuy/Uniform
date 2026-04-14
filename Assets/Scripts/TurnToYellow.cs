@@ -14,16 +14,16 @@ public class TurnToYellow : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-		if (Input.GetButtonDown ("Fire1")) {
-			//Debug.Log("Fire1");
+		Camera cam = Camera.main;
+		if (cam == null)
+			return;
 
-			// PC
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		if (PointerInput.PrimaryPointerDown()) {
+			Vector2 screen = PointerInput.PrimaryScreenPosition();
+			Ray ray = PointerInput.ScreenPointToRay(cam, screen);
 			RaycastHit2D hit = Physics2D.Raycast(ray.origin,ray.direction);
 			if (hit) {
-				//Debug.Log("Ray" + hit.collider.name);
 				if (hit.collider.gameObject == this.gameObject) {
-					//Debug.Log("Hit!" + hit);
 					SpriteRenderer sr = GetComponent<SpriteRenderer>();
 					sr.sprite = yellow;
 					imSelected = true;
@@ -34,11 +34,10 @@ public class TurnToYellow : MonoBehaviour {
 			}
 		}
 
-		if (Input.GetButtonUp("Fire1")) {
-			//Debug.Log ("Up + " + imSelected);
+		if (PointerInput.PrimaryPointerUp()) {
 			if (canSelect()) {
-
-				Vector3 vec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+				Vector2 screen = PointerInput.PrimaryScreenPosition();
+				Vector3 vec = PointerInput.ScreenToWorldPointOnPlayPlane(cam, screen);
 				if (Ghetto.instance.GetComponent<BoxCollider2D>().OverlapPoint(new Vector2(vec.x,vec.y))) {
 					Ghetto.instance.addJew();
 				}
@@ -66,8 +65,8 @@ public class TurnToYellow : MonoBehaviour {
 		//	lr.enabled = true;
 		//	lr.SetPosition(0,transform.position);
 		//	lr.SetPosition(1,Camera.main.ScreenToWorldPoint(Input.mousePosition));
-			Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			pos.z=0;
+			Vector2 screen = PointerInput.PrimaryScreenPosition();
+			Vector3 pos = PointerInput.ScreenToWorldPointOnPlayPlane(cam, screen);
 			transform.position = pos;
 		} else {
 		//	lr.enabled = false;

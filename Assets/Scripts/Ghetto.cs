@@ -31,10 +31,19 @@ public class Ghetto : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (full && Input.GetAxis("Mouse ScrollWheel") < 0f && Application.loadedLevelName == "Ghetto") {
-			Application.LoadLevel("camp");
+		if (full && Application.loadedLevelName == "Ghetto") {
+			if (Input.GetAxis("Mouse ScrollWheel") < 0f || PointerInput.TwoFingerPanDownThisFrame())
+				Application.LoadLevel("camp");
 		}
 	
+	}
+
+	/// <summary>
+	/// Optional NGUI/UI hook: same as scroll / two-finger pan when ghetto is full on the Ghetto scene.
+	/// </summary>
+	public void ContinueToCamp() {
+		if (full && Application.loadedLevelName == "Ghetto")
+			Application.LoadLevel("camp");
 	}
 
 	public void markJew() {

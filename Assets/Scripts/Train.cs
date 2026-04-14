@@ -32,10 +32,13 @@ public class Train : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Vector3 vec1 = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		if (Input.GetButtonDown("Fire1") &&  GetComponent<BoxCollider2D>().OverlapPoint(new Vector2(vec1.x,vec1.y))) {
-			GetComponent<SpriteRenderer>().sprite = yellowTrain;
-			ghetto.clearing = true;
+		Camera cam = Camera.main;
+		if (cam != null) {
+			Vector3 vec1 = PointerInput.ScreenToWorldPointOnPlayPlane(cam, PointerInput.PrimaryScreenPosition());
+			if (PointerInput.PrimaryPointerDown() &&  GetComponent<BoxCollider2D>().OverlapPoint(new Vector2(vec1.x,vec1.y))) {
+				GetComponent<SpriteRenderer>().sprite = yellowTrain;
+				ghetto.clearing = true;
+			}
 		}
 
 		if (unloading) {

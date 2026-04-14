@@ -75,12 +75,15 @@ public class CampGhetto : MonoBehaviour {
 
 			}*/
 			
-			Vector3 vec = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			if (Input.GetButtonDown("Fire1") &&  GetComponent<BoxCollider2D>().OverlapPoint(new Vector2(vec.x,vec.y))) {
-				foreach(GameObject jewObj in jewObjects) {
-					jewObj.GetComponent<SpriteRenderer>().sprite = jew.GetComponent<SpriteRenderer>().sprite;
-					gt.full = true;
-					gt.jewsInGhetto = 10;
+			Camera cam = Camera.main;
+			if (cam != null) {
+				Vector3 vec = PointerInput.ScreenToWorldPointOnPlayPlane(cam, PointerInput.PrimaryScreenPosition());
+				if (PointerInput.PrimaryPointerDown() &&  GetComponent<BoxCollider2D>().OverlapPoint(new Vector2(vec.x,vec.y))) {
+					foreach(GameObject jewObj in jewObjects) {
+						jewObj.GetComponent<SpriteRenderer>().sprite = jew.GetComponent<SpriteRenderer>().sprite;
+						gt.full = true;
+						gt.jewsInGhetto = 10;
+					}
 				}
 			}
 			
