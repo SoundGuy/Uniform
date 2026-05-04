@@ -14,6 +14,9 @@
         border: 0;
         margin: 0;
       }
+      #unity-player {
+        box-sizing: border-box;
+      }
       #unity-root {
         display: block;
         text-align: center;
@@ -27,6 +30,7 @@
       #unity-canvas {
         display: block;
         background: #1F1F20;
+        box-sizing: border-box;
       }
       #mobile-controls {
         display: none;
@@ -51,13 +55,76 @@
       }
       .game-footer {
         font-size: x-small;
-        padding-bottom: 12px;
+        padding: 0 12px 12px;
+        margin: 0 auto;
+        max-width: 720px;
+        box-sizing: border-box;
+      }
+      .game-footer .gf-line {
+        margin: 0.35em 0;
+      }
+      .game-footer .gf-line:first-child {
+        margin-top: 0;
+      }
+      .game-footer .gf-line:last-child {
+        margin-bottom: 0;
+      }
+      body.mobile .game-footer {
+        font-size: 9px;
+        line-height: 1.45;
+        padding: 6px 14px 4px;
+        flex: 0 0 auto;
+        max-width: 100%;
+        text-align: center;
+        word-wrap: break-word;
+        overflow-wrap: anywhere;
+      }
+      body.mobile .game-footer .gf-line {
+        margin: 0.25em 0;
+      }
+      body.mobile .game-footer a {
+        word-break: break-word;
+      }
+      body.mobile #unity-player {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        height: 100dvh;
+        min-height: 100vh;
+        min-height: 100dvh;
+        max-height: 100vh;
+        max-height: 100dvh;
+        overflow: hidden;
+        padding-bottom: 0;
       }
       body.mobile #unity-root {
-        padding-top: 8px;
+        padding-top: 0;
+        flex: 1 1 0;
+        min-height: 0;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      body.mobile #unity-stage {
+        margin: 0;
+        flex-shrink: 0;
       }
       body.mobile #mobile-controls {
-        display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        flex: 0 0 auto;
+        height: calc(44px + env(safe-area-inset-bottom, 0px));
+        min-height: calc(44px + env(safe-area-inset-bottom, 0px));
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        padding-top: 4px;
+        margin-top: 0;
+        background: rgba(219, 217, 211, 0.98);
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        box-sizing: border-box;
       }
     </style>
 #if SHOW_DIAGNOSTICS
@@ -66,13 +133,21 @@
 #endif
   </head>
   <body>
-    <div id="unity-root">
-      <div id="unity-stage">
-        <canvas id="unity-canvas" width={{{ WIDTH }}} height={{{ HEIGHT }}} tabindex="-1" style="width: {{{ WIDTH }}}px; height: {{{ HEIGHT }}}px;"></canvas>
+    <div id="unity-player">
+      <div id="unity-root">
+        <div id="unity-stage">
+          <canvas id="unity-canvas" width={{{ WIDTH }}} height={{{ HEIGHT }}} tabindex="-1" style="width: {{{ WIDTH }}}px; height: {{{ HEIGHT }}}px;"></canvas>
+        </div>
       </div>
-    </div>
-    <div id="mobile-controls">
-      <button id="rotate-button" type="button" aria-label="Toggle rotated view">Rotate</button>
+      <div class="game-footer">
+        <div class="gf-line">Developed during <a href="http://globalgamejam.org/2014/games/uniform">Global Game Jam 2014</a></div>
+        <div class="gf-line">Download for: <a href="UniformPC.zip">PC</a>, <a href="UniformMacOSX.zip">Mac</a>, <a href="UniformLinux.zip">Linux</a></div>
+        <div class="gf-line"><a href="index_old.html">Run without WebGL</a></div>
+        <div class="gf-line"><a href="http://adventuremob.com/unparented/uniform-did-you-play/">Read More about the game after playing</a></div>
+      </div>
+      <div id="mobile-controls">
+        <button id="rotate-button" type="button" aria-label="Toggle rotated view">Rotate</button>
+      </div>
     </div>
 #if SHOW_DIAGNOSTICS
     <div id="unity-footer">
@@ -83,92 +158,152 @@
     <script>
       const canvas = document.querySelector("#unity-canvas");
       const stage = document.querySelector("#unity-stage");
+      const unityPlayer = document.getElementById("unity-player");
+      const unityRoot = document.getElementById("unity-root");
       const rotateButton = document.getElementById("rotate-button");
       const mobileControls = document.getElementById("mobile-controls");
       const baseWidth = {{{ WIDTH }}};
       const baseHeight = {{{ HEIGHT }}};
-      const aspectRatio = baseWidth / baseHeight;
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
       let rotatedFallback = false;
       let nativeLandscapeLocked = false;
 
       if (isMobile) {
         var meta = document.createElement('meta');
         meta.name = 'viewport';
-        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes, viewport-fit=cover';
         document.getElementsByTagName('head')[0].appendChild(meta);
         document.body.classList.add("mobile");
-        mobileControls.style.display = "block";
+        mobileControls.style.display = "flex";
+      }
+
+      function applyCanvasCssSize(cssW, cssH) {
+        const w = Math.max(1, Math.round(cssW * 1000) / 1000);
+        const h = Math.max(1, Math.round(cssH * 1000) / 1000);
+        canvas.style.width = w + "px";
+        canvas.style.height = h + "px";
+        canvas.style.aspectRatio = "";
+        stage.style.width = w + "px";
+        stage.style.height = h + "px";
+      }
+
+      function mobileAvailSize() {
+        const rootRect = unityRoot.getBoundingClientRect();
+        let sw = Math.max(1, rootRect.width);
+        let sh = Math.max(1, rootRect.height);
+        const vv = window.visualViewport;
+        if (vv && vv.width > 0 && vv.height > 0) {
+          const il = Math.max(rootRect.left, vv.offsetLeft);
+          const it = Math.max(rootRect.top, vv.offsetTop);
+          const ir = Math.min(rootRect.right, vv.offsetLeft + vv.width);
+          const ib = Math.min(rootRect.bottom, vv.offsetTop + vv.height);
+          const iw = ir - il;
+          const ih = ib - it;
+          if (iw >= 32 && ih >= 32) {
+            sw = Math.min(sw, iw);
+            sh = Math.min(sh, ih);
+          }
+        }
+        return { w: Math.max(1, sw), h: Math.max(1, sh) };
+      }
+
+      function scheduleLayoutCanvas() {
+        layoutCanvas();
+        requestAnimationFrame(function () {
+          layoutCanvas();
+          requestAnimationFrame(function () {
+            layoutCanvas();
+          });
+        });
+      }
+
+      function clearStagePositionForPortrait() {
+        stage.style.position = "";
+        stage.style.left = "";
+        stage.style.top = "";
+        stage.style.margin = "0 auto";
+        stage.style.transform = "";
+        stage.style.transformOrigin = "";
       }
 
       function setPortraitLayout() {
         rotatedFallback = false;
-        stage.style.transform = "";
-        stage.style.transformOrigin = "";
-        stage.style.margin = "0 auto";
+        clearStagePositionForPortrait();
         rotateButton.textContent = "Rotate";
       }
 
       function setRotatedFallbackLayout() {
         rotatedFallback = true;
-        stage.style.transform = "rotate(90deg)";
-        stage.style.transformOrigin = "center center";
-        stage.style.margin = "0";
         rotateButton.textContent = "Portrait";
       }
 
       function layoutCanvas() {
         if (!isMobile) {
-          canvas.style.width = baseWidth + "px";
-          canvas.style.height = baseHeight + "px";
+          applyCanvasCssSize(baseWidth, baseHeight);
           return;
         }
 
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
+        const avail = mobileAvailSize();
+        const availW = avail.w;
+        const availH = avail.h;
         let targetWidth;
         let targetHeight;
 
         if (!rotatedFallback) {
-          targetWidth = viewportWidth;
-          targetHeight = targetWidth / aspectRatio;
-          if (targetHeight > viewportHeight) {
-            targetHeight = viewportHeight;
-            targetWidth = targetHeight * aspectRatio;
-          }
-
-          stage.style.width = targetWidth + "px";
-          stage.style.height = targetHeight + "px";
-          canvas.style.width = targetWidth + "px";
-          canvas.style.height = targetHeight + "px";
+          const scale = Math.min(availW / baseWidth, availH / baseHeight);
+          targetWidth = baseWidth * scale;
+          targetHeight = baseHeight * scale;
+          applyCanvasCssSize(targetWidth, targetHeight);
+          clearStagePositionForPortrait();
           return;
         }
 
-        targetWidth = viewportHeight;
-        targetHeight = targetWidth / aspectRatio;
-        if (targetHeight > viewportWidth) {
-          targetHeight = viewportWidth;
-          targetWidth = targetHeight * aspectRatio;
+        // Portrait hold + CSS 90deg: on-screen footprint is (baseH, baseW) for unrotated (baseW, baseH).
+        const scaleR = Math.min(availW / baseHeight, availH / baseWidth);
+        targetWidth = baseWidth * scaleR;
+        targetHeight = baseHeight * scaleR;
+        applyCanvasCssSize(targetWidth, targetHeight);
+
+        stage.style.position = "absolute";
+        stage.style.left = "50%";
+        stage.style.top = "50%";
+        stage.style.margin = "0";
+        stage.style.transformOrigin = "center center";
+        stage.style.transform = "translate(-50%, -50%) rotate(90deg)";
+      }
+
+      function requestFullscreenBest(target) {
+        if (!target) {
+          return Promise.resolve(false);
         }
-
-        stage.style.width = targetWidth + "px";
-        stage.style.height = targetHeight + "px";
-        canvas.style.width = targetWidth + "px";
-        canvas.style.height = targetHeight + "px";
-
-        // Rotated element uses unrotated box space; offset to keep centered.
-        const offsetX = (targetHeight - targetWidth) / 2;
-        const offsetY = (targetWidth - targetHeight) / 2;
-        stage.style.transform = "translate(" + offsetX + "px, " + offsetY + "px) rotate(90deg)";
+        const req = target.requestFullscreen
+          || target.webkitRequestFullscreen
+          || target.webkitEnterFullscreen
+          || target.mozRequestFullScreen
+          || target.msRequestFullscreen;
+        if (!req) {
+          return Promise.resolve(false);
+        }
+        try {
+          const p = req.call(target);
+          return Promise.resolve(p).then(function () { return true; }).catch(function () { return false; });
+        } catch (err) {
+          return Promise.resolve(false);
+        }
       }
 
       async function tryNativeLandscapeLock() {
-        if (!document.fullscreenElement && canvas.requestFullscreen) {
-          try {
-            await canvas.requestFullscreen();
-          } catch (err) {
+        if (isIOS) {
+          return false;
+        }
+        let enteredFs = false;
+        if (!document.fullscreenElement) {
+          const fsOk = await requestFullscreenBest(unityPlayer);
+          if (!fsOk) {
             return false;
           }
+          enteredFs = true;
         }
 
         if (screen.orientation && screen.orientation.lock) {
@@ -176,10 +311,24 @@
             await screen.orientation.lock("landscape");
             return true;
           } catch (err) {
+            if (enteredFs && document.exitFullscreen) {
+              try {
+                document.exitFullscreen();
+              } catch (e) {
+                // Ignore exit failures on unsupported browsers.
+              }
+            }
             return false;
           }
         }
 
+        if (enteredFs && document.exitFullscreen) {
+          try {
+            document.exitFullscreen();
+          } catch (e) {
+            // Ignore exit failures on unsupported browsers.
+          }
+        }
         return false;
       }
 
@@ -191,6 +340,13 @@
         if (nativeLandscapeLocked) {
           nativeLandscapeLocked = false;
           rotateButton.textContent = "Rotate";
+          if (document.fullscreenElement && document.exitFullscreen) {
+            try {
+              document.exitFullscreen();
+            } catch (err) {
+              // Ignore exit failures on unsupported browsers.
+            }
+          }
           if (screen.orientation && screen.orientation.unlock) {
             try {
               screen.orientation.unlock();
@@ -208,6 +364,13 @@
           }
         } else {
           setPortraitLayout();
+          if (document.fullscreenElement && document.exitFullscreen) {
+            try {
+              document.exitFullscreen();
+            } catch (err) {
+              // Ignore exit failures on unsupported browsers.
+            }
+          }
           if (screen.orientation && screen.orientation.unlock) {
             try {
               screen.orientation.unlock();
@@ -217,13 +380,18 @@
           }
         }
 
-        layoutCanvas();
+        scheduleLayoutCanvas();
       }
 
       rotateButton.addEventListener("click", rotateToggle);
       window.addEventListener("resize", layoutCanvas);
-      window.addEventListener("orientationchange", layoutCanvas);
-      layoutCanvas();
+      window.addEventListener("orientationchange", scheduleLayoutCanvas);
+      document.addEventListener("fullscreenchange", scheduleLayoutCanvas);
+      if (window.visualViewport) {
+        window.visualViewport.addEventListener("resize", scheduleLayoutCanvas);
+        window.visualViewport.addEventListener("scroll", scheduleLayoutCanvas);
+      }
+      scheduleLayoutCanvas();
 
       createUnityInstance(canvas, {
         arguments: [],
@@ -250,20 +418,10 @@
             unityDiagnostics.openDiagnosticsDiv(unityInstance.GetMetricsInfo);
         };
 #endif
-        layoutCanvas();
+        scheduleLayoutCanvas();
       }).catch((message) => {
         alert(message);
       });
     </script>
-
-    <div class="game-footer">
-      <br>
-      Developed during <a href="http://globalgamejam.org/2014/games/uniform">Global Game Jam 2014</a>
-      <br>
-      Download for: <a href="UniformPC.zip">PC</a>, <a href="UniformMacOSX.zip">Mac</a>, <a href="UniformLinux.zip">Linux</a><br>
-      <a href="index_old.html">Run without WebGL</a><br>
-      <br>
-      <br><a href="http://adventuremob.com/unparented/uniform-did-you-play/">Read More about the game after playing</a><br>
-    </div>
   </body>
 </html>
